@@ -1,0 +1,52 @@
+.navbar{
+	background-color: #0E313D !important; 
+}
+.logo{
+	background-color: #0E313D !important;
+}
+.left-side, .main-sidebar{
+	background-color:rgba(34, 45, 50, 0.8) !important;
+}
+.user-header{
+	background-color:rgba(51, 51, 51, 0.7)  !important;
+}
+#bintang{
+	color: red;
+}
+.jarak{
+	margin-top: 50px;
+}
+.inputKariawan{
+	margin-top: 85px;
+}
+
+#kont{
+	font-size: 18px;
+}
+
+.box-comments .comment-text{
+	margin-left: 10px;
+}
+.profile{
+	margin-top:100px;
+}
+.loading{
+	visibility: hidden;
+}
+
+.show{
+	visibility: block;
+}
+#radio{
+	margin-left:10px;
+	margin-top: -12px;
+}
+#kekasi{
+	display: none;
+}
+#kestaf{
+	display: none;
+}
+#setafkabit{
+	display: none;	
+}
