@@ -6,10 +6,14 @@ Route::get('/', function () {
     return view('authh.login');
 });
 
-Route::get('/tes', function(){
-	return view('authh.inputPegawai');
-});
+Route::get('/login', 'AuthController@login');
+Route::post('/login', 'AuthController@postLogin')->name('login');
 
-Auth::routes();
+Route::get('/daftarKariawan', 'AuthController@create');
+Route::post('/daftarKariawan', 'AuthController@store')->name('daftar');
+
+// Route::get('/beranda', '')
+
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

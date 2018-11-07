@@ -42,25 +42,25 @@
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="user" placeholder="User Name">
         <span class="fa fa-user form-control-feedback"></span>
-      @if ($errors->has('user'))
+      {{-- @if ($errors->has('user'))
           <span >
               <p id="bintang">{{ $errors->first('user') }}</p>
           </span>
-        @endif
-        @if (session('msg'))
+        @endif --}}
+        {{-- @if (session('msg'))
           <span class="invalid-feedback" role="alert">
               <strong>{{ session('msg') }}</strong>
           </span>
-        @endif
+        @endif --}}
       </div>
       <div class="form-group has-feedback">
         <input type="password" class="form-control" name="password" placeholder="Password" >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      @if ($errors->has('password'))
+      {{-- @if ($errors->has('password'))
           <span >
               <p id="bintang">{{ $errors->first('password') }}</p>
           </span>
-        @endif
+        @endif --}}
       </div>
 
       <div class="row">

@@ -1,39 +1,41 @@
 @extends('layouts.master')
 @section('title', 'Masukan Data Pegawai Baru')
 @section('conten')
-<div class="col-md-6 col-md-offset-3 inputKariawan">
-	
-	<div class="box box-primary">
+<section class="content">
+
+      <!-- SELECT2 EXAMPLE -->
+{{-- <div class="col-md-6 col-md-offset-3"> --}}
+        <div class="row inputKariawan">
+          <div class="col-md-6 col-md-offset-3">
+      <div class="box box-default">
+            
+          
+      
             <div class="box-header with-border">
               <h3 class="box-title">Input Pegawai Baru</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
               <div class="box-body">
+            <form role="form" action="{{route('daftar')}}" method="POST">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nip</label>
-                  <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Nip">
+                  <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Nip" name="nip">
                 </div>
 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Nama</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nama">
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nama" name="name">
                 </div>
 
                  <div class="form-group">
                   <label for="exampleInputPassword1">User</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="User">
-                </div>
-
-                 <div class="form-group">
-                  <label for="exampleInputPassword1">Nama</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nama">
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="User" name="user">
                 </div>
 
                  <div class="form-group">
                   <label>Bidang</label>
-                  <select class="form-control">
+                  <select class="form-control" name="sector">
                     <option>Pilih</option>
                     <option>Sekertaris</option>
                     <option>Program</option>
@@ -68,7 +70,7 @@
                 </div>
                 <div class="form-group">
                   <label>Eslon</label>
-                 <select class="form-control">
+                 <select class="form-control" name="eslon">
                     <option>Pilih</option>
                     <option>3</option>
                     <option>4</option>
@@ -78,13 +80,22 @@
 
                  <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                 </div>
+                 {{csrf_field()}}
 
-
-               
-               
+              {{-- <div class="form-group"> --}}
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                
               </div>
-</div>
+              {{-- </div> --}}
+            </form>
 
+            </div>
+        </div>
+</div>
+</div>
+</div>
+</section>
+  <div class="control-sidebar-bg"></div>
 @endsection
