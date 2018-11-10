@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Form Pemberian Tugas')
 @section('conten')
 <script src="{{ asset('asset/tinymce/js/tinymce/tinymce.min.js') }}
@@ -20,183 +20,76 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <form  method="post" action="{{route('job')}}" enctype="multipart/form-data">
+        <form  method="post" action="{{-- {{route('job')}} --}}" enctype="multipart/form-data">
           {{csrf_field()}}
           <div class="row">
             
             <!-- /.col -->
             <div class="col-md-6">
-              @if (Auth::user()->status == 3)
-                <div class="form-group ">
-                <label>Kabit </label>
-               
-                @if (old('user'))
-                <select id="user" class="form-control select2" style="width: 100%;" name="user">
-                  @foreach($users as $user)
-                    <option value="{{$user->id}}"
-                      @if (old('user') == $user->id)
-                       selected @endif>{{$user->user}}</option>
-                  @endforeach
-                </select>
-
-                @else
-
-                  <select id="user" class="form-control select2" style="width: 100%;" name="user[]" multiple="multiple">
-                    {{-- <option selected disabled>Pilih Kabit</option> --}}
-                    <option value="" disabled>Pilih </option>
-                    @foreach($users as $user)
-                      <option value="{{$user->id}}">{{$user->user}}</option>
-                    @endforeach
-                  </select>
-                @endif
-
-                @if ($errors->has('user'))
-                    <span >
-                        <p id="bintang">{{ $errors->first('user') }}</p>
-                    </span>
-                  @endif
-              </div>
-              @endif
-
-              @if (Auth::user()->status == 2 )
-              <div class="form-group ">
-                <label>Kasi </label>
-                <select id="kasiStaf" class="form-control select2 kasiStaf2" style="width: 100%;" name="kasiStaf[]" multiple="multiple" >
-                    @foreach($leaders->where('group', Auth::user()->group) as $leader)
-                      <option value="{{$leader->id}}">{{$leader->user}}</option>
-                    @endforeach
-                </select>
-                @if ($errors->has('kasiStaf'))
-                    <span >
-                        <p id="bintang">{{ $errors->first('kasiStaf') }}</p>
-                    </span>
-                  @endif
-              </div>
-              @endif
-
-              @if (Auth::user()->status == 1)
-                  <div class="form-group ">
-                <label>Pilih Setaf </label>
-
-                @if (old('stafKabit'))
-                  <select id="stafKabit2" class="form-control select2" style="width: 100%;" name="stafKabit[]"  multiple="multiple">
-                    @foreach($users as $user)
-
-                      <option @foreach (old('stafKabit') as $oldStafKabit) value="{{$user->id}}" @if($oldStafKabit == $user->id)
-                      selected  @endif  @endforeach >{{$user->user}}</option>
-                    @endforeach
-                  </select>
-
-                @else
-                <select id="stafKabit2" class="form-control select2" style="width: 100%;" name="stafKabit[]"  multiple="multiple">
-                    @foreach($users as $user)
-                      <option value="{{$user->id}} ">{{$user->user}}</option>
-                    @endforeach
-                  </select>
-                @endif
-                @if ($errors->has('stafKabit'))
-                    <span >
-                        <p id="bintang">{{ $errors->first('stafKabit') }}</p>
-                    </span>
-                  @endif
-              </div>
-              @endif
-
-              @if (Auth::user()->status > 1)
-                
-              
-              <label>Apakah Anda Ingin Meneruskan Tugas ini ? </label>
+             <label>Apakah Anda Ingin Meneruskan Tugas ini ? </label>
               <div class="form-group" id="radio">
 
                 <div class="input-group">
                    <div class="radio">
                     <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="tidak" checked class="jabtan" {{old('type') == "tidak" ? 'checked='.'"'.'checked'.'"' : '' }}>Tidak 
-                    </label><br>
-                    @if (Auth::user()->status == 3  || Auth::user()->status == 2)
+                      <input type="radio" name="type" id="optionsRadios2" value="kabit" checked class="jabtan" {{old('type') == "kabit" ? 'checked='.'"'.'checked'.'"' : '' }}>Kabit 
+                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                     <label>
+                      <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>Kasi
+                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
                     <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="stafKabit"  class="jabtan" {{old('type') == "stafKabit" ? 'checked='.'"'.'checked'.'"' : '' }}>Lanjutkan Ke Staf Kabit 
+                      <input type="radio" name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
                     </label>
-                    @endif
-
-                  </div>
-                  @if (Auth::user()->status == 3)
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>Teruskan Ke Kasi 
-                    </label>
-                  </div>
-                  @endif
-
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="setaf" class="jabtan" {{old('type') == "setaf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf Kasi 
-                    </label>
+                    
+                  {{-- </div> --}}
+                  {{-- <div class="radio"> --}}
+                   
                   </div>
 
                   </div>
-                  </div>
-                @endif
 
-                  {{-- setaf kabit --}}
-                <div class="form-group" id="setafkabit">
-                <label>Pilih Setaf Kabit</label>
-                <small class="label label-danger tes loading"><i class="fa fa-clock-o"></i> Loading ...</small>
-                <select class="form-control select2" name="setafkabit[]" id="stfkabit" multiple="multiple" data-placeholder="Nama"
-                        style="width: 100%;">
-                      @foreach($users as $user)
-                        <option value="{{$user->id}} ">{{$user->user}}</option>
-                      @endforeach
-                </select>
-                 @if ($errors->has('setafkabit'))
-                    <span >
-                        <p id="bintang">{{ $errors->first('setafkabit') }}</p>
-                    </span>
-                  @endif
+                  {{-- input dinamis --}}
 
-              </div>
-
-                  {{-- kasi --}}
-              <div class="form-group" id="kekasi">
-                <label>Pilih Kasi</label>
+                <div class="form-group" id="kabit">
+                <label>Pilih Kabit</label>
                 <small class="label label-danger loading tes"><i class="fa fa-clock-o"></i> Loading ...</small>
-                <select class="form-control select2" name="kekasi[]" id="kekasi2" multiple="multiple" data-placeholder="Nama"
+                <select class="form-control select2" name="kabit[]" id="kabit" multiple="multiple" data-placeholder="Nama"
                         style="width: 100%;">
                         <option disabled>Pilih</option>
-                @foreach($leaders->where('group', Auth::user()->group) as $leader)
-                    <option value="{{$leader->id}}">{{$leader->user}}</option>
+                @foreach($users->where('group', Auth::user()->group) as $user)
+                    <option value="{{$user->id}}">{{$user->user}}</option>
                 @endforeach
                 </select>
-                 @if ($errors->has('kekasi'))
+                 @if ($errors->has('kabit'))
                     <span >
-                        <p id="bintang">{{ $errors->first('kekasi') }}</p>
+                        <p id="bintang">{{ $errors->first('kabit') }}</p>
                     </span>
                   @endif
 
               </div>
-           
-                  {{-- BUAT TANPILAN SETAF --}}
-              <div id="kestaf">
-                @if (Auth::user()->status == 3)
-               <div class="form-group ">
-                <label>Kasi </label>
-                <select id="kasiStaf" class="form-control select2" style="width: 100%;" name="kasiStaf[]" multiple="multiple" >
-                    @foreach($leaders->where('group', Auth::user()->group) as $leader)
-                      <option value="{{$leader->id}}">{{$leader->user}}</option>
+              {{-- kedua --}}
+                  
+                <div class="form-group " id="kasi">
+                <label>Pilih Kasi </label>
+                <select id="kasi" class="form-control select2" style="width: 100%;" name="kasi[]" multiple="multiple" data-placeholder="Nama" >
+                    @foreach($users->where('group', Auth::user()->group) as $user)
+                      <option value="{{$user->id}}">{{$user->user}}</option>
                     @endforeach
                 </select>
-                @if ($errors->has('kasiStaf'))
+                @if ($errors->has('kasi'))
                     <span >
-                        <p id="bintang">{{ $errors->first('kasiStaf') }}</p>
+                        <p id="bintang">{{ $errors->first('kasi') }}</p>
                     </span>
                   @endif
               </div>
-                @endif
 
-              <div class="form-group ">
+              {{-- tiga --}}
+               <div class="form-group" id="staf">
                 <label>Pilih Setaf</label>
                 <small class="label label-danger tes loading "><i class="fa fa-clock-o"></i> Loading ...</small>
-                <select   class="form-control select2" name="staf[]" id="stafKasi" multiple="multiple" data-placeholder="Nama"
+                <select   class="form-control select2" name="staf[]" id="staf" multiple="multiple" data-placeholder="Nama"
                         style="width: 100%;">
                         <option >Pilih </option>
                 </select>
@@ -207,10 +100,11 @@
                   @endif
 
               </div>
-              </div>            
-              <!-- /.form-group -->
-            
-              <!-- /.form-group -->
+
+              </div>
+
+              {{--  --}}
+                
             </div>
             <!-- /.col -->
             <div class="col-md-6">
@@ -243,14 +137,13 @@
               </div>
 
                 <div class="form-group">
-                <div class="form-group">
                   <label>Jenis Tugas</label>
-                  <input type="text" class="form-control" name="jenisTugas" placeholder="Jenis Tugas" value="{{old('jenisTugas')}}">
-                  @if ($errors->has('jenisTugas'))
-                    <span >
-                        <p id="bintang">{{ $errors->first('jenisTugas') }}</p>
-                    </span>
-                  @endif
+                  <select class="form-control">
+                    <option>Pilih</option>
+                    <option>Ringan</option>
+                    <option>Sedang</option>
+                    <option>Sulit</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -305,7 +198,7 @@
 
 <script src="{{ asset('asset/dist/js/adminlte.min.js') }}"></script>
 <script type="text/javascript">
-		 $(function () {
+		$(function () {
     //Initialize Select2 Elements
     $('.selectKabit').select2();
     $('.select2').select2()
@@ -324,122 +217,65 @@
       // startDate: '-3d'
     });
 
-$("#user").change(function() {
-    $('.tes').removeClass('loading');
-    var terpilih =  $('#user').val();
-   
-     $.ajax({
-        url : '/ketuaDevisi/kasi/',
-        method : "POST",
-        data : {
-          "_token": "{{ csrf_token() }}",
-          "terpilih" : terpilih
-        }
-      }).done(function(hasil){
-        $('#kekasi2').html(hasil);
-        $('#kasiStaf').html(hasil);
-         $('.tes').addClass('loading');
-        // console.log(hasil);
-      });
-
-
-      $.ajax({
-        url : '/ketuaDevisi/setafkabit/',
-        method : "POST",
-        data : {
-          "_token": "{{ csrf_token() }}",
-          "terpilih" : terpilih
-        }
-      }).done(function(hasil){
-        $('#stfkabit').html(hasil);
-         $('.tes').addClass('loading');
-      });
-
-    
-  });
-
-
-// setaf yang paling bawah 
-$("#kasiStaf").change(function() {
-  
-   var terpilih =  $('#kasiStaf').val();
-   // console.log(terpilih);
-    $.ajax({
-        url : '/ketuaDevisi/stfKasi/',
-        method : "POST",
-        data : {
-          "_token": "{{ csrf_token() }}",
-          "terpilih" : terpilih
-        }
-      }).done(function(hasil){
-        $('#stafKasi').html(hasil);
-      });
-  
-
-});
-
 // cekckbox
 // cek = 'tidak';
 var cek = $("input[name='type']:checked").val();
 
-
-
   $('.jabtan').change(function() {
-    var tes = $("input[name='type']:checked").val();
-    cek = tes;
-   
-    if (cek == "tidak") { 
-        $('#stafKabit2').removeAttr('disabled');
-        $('#setafkabit, #kekasi, #kestaf').slideUp('fast');
-        $('#stfkabit, #kekasi2, #stafKasi').val(null).trigger('change');
+    var jabtan = $("input[name='type']:checked").val();
+    cek = jabtan;
+
+    if (cek == "kabit") { 
+        $('#kasi, #staf').removeAttr('disabled');
+        $('#kasi, #staf').val(null).trigger('change');
+
+        $('#kasi, #staf').slideUp('fast');
+        $('#kabit').slideDown('fast');
        
     } else if(cek == "kasi") {
+        $('#kabit, #staf').removeAttr('disabled');
+        $('#kabit, #staf').val(null).trigger('change');
 
-        $('#stfkabit,#stafKabit2, #kekasi2, #kasiStaf, #stafKasi').val(null).trigger('change');
-        $('#stafKabit2').attr('disabled', 'disabled');
-        $('#setafkabit, #kestaf').slideUp('fast');
-        $("#kekasi").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
+        $('#kabit, #staf').slideUp('fast');
+        $("#kasi").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
     
-    }else if(cek == 'stafKabit'){
-        $('#stfkabit, #kekasi2, #kasiStaf, #stafKasi').val(null).trigger('change');
-        $('#stafKabit2, #kasiStaf').attr('disabled', 'disabled');
-        $('#setafkabit').slideDown('fast');
-        $("#kekasi, #kestaf").slideUp("fast");
+    }else if(cek == 'staf'){
+        $('#kasi, #kabit').removeAttr('disabled');
+        $('#kasi, #kabit').val(null).trigger('change');
+
+        $('#kasi, #kabit').slideUp('fast');
+        $("#staf").slideDown("fast");
     
-    }else{
-        $('#stfkabit, #kekasi2, #stafKasi').val(null).trigger('change');
-        $('#stafKabit2').attr('disabled', 'disabled');
-        $("#kekasi").slideUp("fast"); 
-        $("#kestaf").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
     }
+
   });
 
 if (typeof(cek) == 'undefined') {
-  cek = 'tidak';
+  cek = 'kabit';
 }
 
-   if (cek == "tidak") { 
-        $('#setafkabit, #kekasi, #kestaf').slideUp('fast');
-        $('#stfkabit, #kekasi2, #kasiStaf, #stafKasi').val(null).trigger('change');
+    if (cek == "kabit") { 
+        $('#kasi, #staf').removeAttr('disabled');
+        $('#kasi, #staf').val(null).trigger('change');
+        $('#kasi, #staf').slideUp('fast');
+        $('#kabit').slideDown('fast');
        
     } else if(cek == "kasi") {
-        $('#stfkabit, #kekasi2, #kasiStaf, #stafKasi').val(null).trigger('change');
-        $('#stafKabit2').attr('disabled', 'disabled');
-        $('#setafkabit, #kestaf').slideUp('fast');
-        $("#kekasi").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
+
+        $('#kabit, #staf').removeAttr('disabled');
+        $('#kabit, #staf').val(null).trigger('change');
+        $('#kabit, #staf').slideUp('fast');
+        $("#kasi").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
     
-    }else if(cek == 'stafKabit'){
-        $('#stfkabit, #kekasi2, #kasiStaf, #stafKasi').val(null).trigger('change');
-        $('#stafKabit2').attr('disabled', 'disabled');
-        $('#setafkabit').slideDown('fast');
-        $("#kekasi, #kestaf").slideUp("fast");
+    }else if(cek == 'staf'){
+        $('#kasi, #kabit').removeAttr('disabled');
+        $('#kasi, #kabit').val(null).trigger('change');
+
+        $('#kasi, #kabit').slideUp('fast');
+        $("#staf").slideDown("fast");
     
-    }else{
-        $('#stfkabit, #kekasi2, #kasiStaf, #stafKasi').val(null).trigger('change');
-        $('#stafKabit2').attr('disabled', 'disabled');
-        $("#kekasi, #setafkabit").slideUp("fast"); 
-        $("#kestaf").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
     }
+
   })
 	</script>
 @endsection

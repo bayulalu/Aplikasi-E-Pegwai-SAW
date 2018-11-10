@@ -99,7 +99,7 @@
                   {{-- src="{{asset('storage/fotoKetua/'.Auth::user()->foto)}}" --}}
                 {{-- @endif --}}
                  class="user-image" alt="User Image">
-              <span class="hidden-xs">{{-- {{Auth::user()->user}} --}}Adminstator</span>
+              <span class="hidden-xs">{{Auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -113,7 +113,7 @@
                  class="img-circle" alt="User Image">
 
                 <p>
-                  {{-- {{Auth::user()->user}} --}} Adminstator
+                  {{Auth::user()->user}}
                 </p>
               </li>
               
@@ -152,7 +152,7 @@
                  class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{-- {{Auth::user()->user}} --}} Adminstator</p>
+          <p>{{Auth::user()->name}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -161,7 +161,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         {{-- <li class="header">MAIN NAVIGATION</li> --}}
         <li>
-          <a href="{{-- {{route('ketua.beranda')}} --}}">
+          <a href="{{route('beranda')}}">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
           
@@ -175,7 +175,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{-- {{route('job')}} --}}"><i class="fa  fa-archive"></i>Pemberian Tugas</a></li>
+            <li><a href="{{route('job')}}"><i class="fa  fa-archive"></i>Pemberian Tugas</a></li>
             
             {{-- @if (Auth::user()->status != 3) --}}
             <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Daftar Tugas</a></li>

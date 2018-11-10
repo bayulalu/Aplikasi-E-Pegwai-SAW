@@ -9,10 +9,17 @@ Route::get('/', function () {
 Route::get('/login', 'AuthController@login');
 Route::post('/login', 'AuthController@postLogin')->name('login');
 
-Route::get('/daftarKariawan', 'AuthController@create');
-Route::post('/daftarKariawan', 'AuthController@store')->name('daftar');
+Route::group(['middleware' => 'auth'], function(){
 
-// Route::get('/beranda', '')
+	// pendaftaran pegawai
+	Route::get('/inputpegawai', 'AuthController@create');
+	Route::post('/inputpegawai', 'AuthController@store')->name('daftar');
+
+	// pemberian tugas
+	Route::get('/beranda', 'jobController@index')->name('beranda');
+	Route::get('/job', 'jobController@create')->name('job');
+
+});
 
 // Auth::routes();
 

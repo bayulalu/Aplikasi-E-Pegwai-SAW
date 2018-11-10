@@ -58,6 +58,7 @@
                     <option>Telekomunikasi Dan Pengendalian</option>
                     <option>============</option>
                     <option>Statistik</option>
+                    <option>Statistik Sosial</option>
                     <option>Statistik Ekonomi</option>
                     <option>Statistik SDA Dan Infastruktur</option>
                     <option>============</option>
