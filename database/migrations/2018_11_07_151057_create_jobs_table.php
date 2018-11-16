@@ -15,12 +15,13 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title', 255);
             $table->string('slug', 255);
             $table->text('ket');
             $table->date('time');
             $table->date('deadLine');
             $table->string('status', 25);
+            $table->string('level', 255);
 
             $table->string('kind', 255);
 

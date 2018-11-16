@@ -125,7 +125,7 @@
                   <a href="{{-- {{ route('ketua.profile') }} --}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{-- {{route('logout4')}} --}}" class="btn btn-default btn-flat">Keluar</a>
+                  <a href="{{route('logout')}}" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
             </ul>
@@ -240,7 +240,7 @@
             <li><a href="{{-- {{ route('ketua.profile') }} --}}"><i class="fa fa-user"></i>Profile</a></li>
             <li><a href="{{-- {{ route('ketua.ubah') }} --}}"><i class="fa  fa-cog"></i>Ubah Profile</a></li>
             <li><a href="{{-- {{ route('ketua.ubahSandi') }} --}}"><i class="fa  fa-cog"></i>Ubah Kata Sandi</a></li>
-            <li><a href="{{-- {{route('logout4')}} --}}"><i class="fa fa-sign-out"></i>Keluar</a></li>
+            <li><a href="{{route('logout')}}"><i class="fa fa-sign-out"></i>Keluar</a></li>
           </ul>
         </li>
                 </li>

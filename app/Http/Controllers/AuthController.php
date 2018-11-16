@@ -35,7 +35,6 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-
       $this->validate($request, [
           'name' => 'required',
           'nip' => 'required',
@@ -49,7 +48,9 @@ class AuthController extends Controller
       // dd($group2);
       $group2 = $this->group($request);
   
-    // dd($group2);
+      if (empty($group2)) {
+          $group2 = '';
+      }
 
       $user = User::create([
        		'name' => $request->name,
@@ -87,5 +88,11 @@ class AuthController extends Controller
           return $group2 = 'Balai Informasi Teknologi Edukasi';
       }
 
+    }
+
+    public function logout()
+    {
+      Auth::guard()->logout();
+     return redirect()->route('login');
     }
 }

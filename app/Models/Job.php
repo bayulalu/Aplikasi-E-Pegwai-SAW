@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
+  protected $guarded = ['id'];
+  
     public function user()
     {
     	return $this->belongsTo('App\Models\User');
@@ -22,6 +24,6 @@ class Job extends Model
         return false;
       }
 
-      return Auth::user()->id == $this->leader_id;
+      return Auth::user()->id == $this->user_id;
     }
 }

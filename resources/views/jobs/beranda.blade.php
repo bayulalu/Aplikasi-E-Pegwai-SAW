@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 @section('title', 'Beranda')
 @section('conten')
@@ -31,17 +32,45 @@
                     <th>Batas Waktu</th>
                     <th>Status</th>
                     <th>Jenis Tugas</th>
-                    {{-- <th >Aksi</th> --}}
+                    <th >Aksi</th>
                   </tr>
                   </thead>
+                    @php
+                      $no = 1;
+                    @endphp
                   <tbody>
-                    <th>1</th>
-                    <th>Alex</th>
-                    <th>Rapat</th>
-                    <th>12/2/2018</th>
-                    <th>20/2/2018</th>
-                    <th>Belum selesai</th>
-                    <th>RIngan</th>
+  
+                     @foreach ($jobs as $job)
+                     @foreach ($job->users as $user)
+                       @if ($user->id == Auth::user()->id)
+                              
+                  <tr>
+                    <td><a >{{$no}}</a></td>
+                    @php
+                      $no++;
+                    @endphp
+                    <td>
+                      @foreach ($job->users as $user)
+                        {{$user->name}},
+                      @endforeach
+                      
+                    </td>
+                    <td>{{$job->title}}</td>
+                    <td>{{$job->time}}</td>
+                    <td>{{$job->deadLine}}</td>
+                    
+                    <td>
+                      @if ($job->status == 'belum')
+                        Belum Selesai
+                      @endif
+                    </td>
+                    <td>{{$job->level}}</td>
+                    
+                    <td><a href="/rincian/{{$job->slug}}" class="btn btn-info"">Lihat</a></td>
+                    @endif
+                     @endforeach
+                    @endforeach
+
                   </tbody>
                 </table>
               </div>

@@ -6,21 +6,27 @@ Route::get('/', function () {
     return view('authh.login');
 });
 
-Route::get('/login', 'AuthController@login');
-Route::post('/login', 'AuthController@postLogin')->name('login');
+Route::group(['middleware' => 'guest'], function(){
+	Route::get('/login', 'AuthController@login')->name('login');
+	Route::post('/login', 'AuthController@postLogin')->name('login');
+});
+
 
 Route::group(['middleware' => 'auth'], function(){
 
 	// pendaftaran pegawai
-	Route::get('/inputpegawai', 'AuthController@create');
-	Route::post('/inputpegawai', 'AuthController@store')->name('daftar');
+	Route::get('/daftar-pegawai', 'AuthController@create');
+	Route::post('/daftar-pegawai', 'AuthController@store')->name('daftar');
 
 	// pemberian tugas
 	Route::get('/beranda', 'jobController@index')->name('beranda');
-	Route::get('/job', 'jobController@create')->name('job');
+	Route::get('/rincian/{id}', 'jobController@show');
+	Route::get('/pemberian-tugas', 'jobController@create')->name('job');
+	Route::post('/pemberian-tugas', 'jobController@store')->name('job');
 
+	// Logout
+	Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 
-// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

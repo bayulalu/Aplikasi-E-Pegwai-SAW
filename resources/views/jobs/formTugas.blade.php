@@ -20,7 +20,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <form  method="post" action="{{-- {{route('job')}} --}}" enctype="multipart/form-data">
+        <form  method="post" action="{{route('job')}}" enctype="multipart/form-data">
           {{csrf_field()}}
           <div class="row">
             
@@ -30,17 +30,22 @@
               <div class="form-group" id="radio">
 
                 <div class="input-group">
-                   <div class="radio">
-                    <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="kabit" checked class="jabtan" {{old('type') == "kabit" ? 'checked='.'"'.'checked'.'"' : '' }}>Kabit 
-                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                   <div class="radio">
+                    @if($usr->eslon == 2)
+                      <label>
+                        <input type="radio" name="type" id="optionsRadios2" value="kabit"  class="jabtan" {{old('type') == "kabit" ? 'checked='.'"'.'checked'.'"' : '' }}>Kabit 
+                      </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endif
+
+                    @if($usr->eslon == 3)
                      <label>
                       <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>Kasi
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endif
                     
                     <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
+                      <input type="radio" checked name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
                     </label>
                     
                   {{-- </div> --}}
@@ -55,16 +60,16 @@
                 <div class="form-group" id="kabit">
                 <label>Pilih Kabit</label>
                 <small class="label label-danger loading tes"><i class="fa fa-clock-o"></i> Loading ...</small>
-                <select class="form-control select2" name="kabit[]" id="kabit" multiple="multiple" data-placeholder="Nama"
+                <select class="form-control select2" name="sectors[]" id="kabit" multiple="multiple" data-placeholder="Nama"
                         style="width: 100%;">
                         <option disabled>Pilih</option>
-                @foreach($users->where('group', Auth::user()->group) as $user)
-                    <option value="{{$user->id}}">{{$user->user}}</option>
+                @foreach($users->where('eslon', 3) as $user)
+                    <option value="{{$user->id}}">{{$user->name. ' - '. $user->sector}}</option>
                 @endforeach
                 </select>
-                 @if ($errors->has('kabit'))
+                 @if ($errors->has('sectors'))
                     <span >
-                        <p id="bintang">{{ $errors->first('kabit') }}</p>
+                        <p id="bintang">{{ $errors->first('sectors') }}</p>
                     </span>
                   @endif
 
@@ -73,14 +78,14 @@
                   
                 <div class="form-group " id="kasi">
                 <label>Pilih Kasi </label>
-                <select id="kasi" class="form-control select2" style="width: 100%;" name="kasi[]" multiple="multiple" data-placeholder="Nama" >
-                    @foreach($users->where('group', Auth::user()->group) as $user)
-                      <option value="{{$user->id}}">{{$user->user}}</option>
+                <select id="kasi" class="form-control select2" style="width: 100%;" name="sectors[]" multiple="multiple" data-placeholder="Nama" >
+                    @foreach($users->where('eslon', 4) as $user)
+                      <option value="{{$user->id}}">{{$user->name. ' - '. $user->sector}}</option>
                     @endforeach
                 </select>
-                @if ($errors->has('kasi'))
+                @if ($errors->has('sectors'))
                     <span >
-                        <p id="bintang">{{ $errors->first('kasi') }}</p>
+                        <p id="bintang">{{ $errors->first('sectors') }}</p>
                     </span>
                   @endif
               </div>
@@ -89,13 +94,15 @@
                <div class="form-group" id="staf">
                 <label>Pilih Setaf</label>
                 <small class="label label-danger tes loading "><i class="fa fa-clock-o"></i> Loading ...</small>
-                <select   class="form-control select2" name="staf[]" id="staf" multiple="multiple" data-placeholder="Nama"
+                <select   class="form-control select2" name="sectors[]" id="staf" multiple="multiple" data-placeholder="Nama"
                         style="width: 100%;">
-                        <option >Pilih </option>
+                      @foreach ($users->where('eslon', 5) as $user)
+                           <option value="{{$user->id}}">{{$user->name. ' - '. $user->sector}}</option>
+                      @endforeach
                 </select>
-                 @if ($errors->has('staf'))
+                 @if ($errors->has('sectors'))
                     <span >
-                        <p id="bintang">{{ $errors->first('staf') }}</p>
+                        <p id="bintang">{{ $errors->first('sectors') }}</p>
                     </span>
                   @endif
 
@@ -138,9 +145,9 @@
 
                 <div class="form-group">
                   <label>Jenis Tugas</label>
-                  <select class="form-control">
-                    <option>Pilih</option>
-                    <option>Ringan</option>
+                  <select class="form-control level" name="level">
+                    <option checked id="levelPilih">Pilih</option>
+                    <option >Ringan</option>
                     <option>Sedang</option>
                     <option>Sulit</option>
                   </select>
@@ -156,10 +163,10 @@
            <div class="form-group">
                 <div class="form-group">
                   <label>Judul</label>
-                  <input type="text" class="form-control" placeholder="Judul" name="judul" value="{{old('judul')}}">
-                  @if ($errors->has('judul'))
+                  <input type="text" class="form-control" placeholder="Judul" name="title" value="{{old('title')}}">
+                  @if ($errors->has('title'))
                     <span >
-                        <p id="bintang">{{ $errors->first('judul') }}</p>
+                        <p id="bintang">{{ $errors->first('title') }}</p>
                     </span>
                   @endif
                 </div>
@@ -219,6 +226,7 @@
 
 // cekckbox
 // cek = 'tidak';
+
 var cek = $("input[name='type']:checked").val();
 
   $('.jabtan').change(function() {
@@ -275,6 +283,10 @@ if (typeof(cek) == 'undefined') {
         $("#staf").slideDown("fast");
     
     }
+
+    $('.level').change(function() {
+      $('#levelPilih').remove();
+    });
 
   })
 	</script>

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Tugas')
 @section('conten')
 
@@ -18,7 +18,7 @@
                   src="{{asset('storage/fotoKetua/'.Auth::user()->foto)}}"
                 @endif
                  class="img-circle" alt="User Image">
-                <span class="username"><a href="#">{{$job->leader->user}}</a></span>
+                <span class="username"><a href="#">{{$job->user->name}}</a></span>
                 <span class="description">{{$job->time}}</span>
               </div>
               <!-- /.user-block -->
@@ -31,52 +31,12 @@
             <div class="box-body">
               <!-- post text -->
               <div id="kont">
-              <p>Dari : {{$job->leader->user}}</p>
-              <p>Untuk :@if ($job->leader->status == 3)
+              <p>Dari : {{$job->user->name}}</p>
+              <p>Untuk :
+                        @foreach ($job->users as $user)
+                          {{$user->name}},
+                        @endforeach
 
-                @if (!empty($job->users))
-                  @foreach ($job->users as $user)
-                    <span class="label label-success">{{$user->user}}</span>
-                  @endforeach
-                     
-                  @endif
-                        
-
-                @if (!empty($job->leaders))
-             
-                   @foreach ($job->leaders as $leader)
-                        <span class="label label-success">{{$leader->user}}</span>
-                      @endforeach
-
-                    @endif
-                           
-
-                      {{-- buat tampilan sekertatis --}}
-                      @elseif($job->leader->status == 2)
-                        @if (!empty($job->users))
-                            @foreach ($job->users as $user)
-                              <span class="label label-success">{{$user->user}}</span>
-                            @endforeach
-                        @endif
-
-                        @if (!empty($job->leaders))
-                            @if ($job->leaders->count() > 1)
-                                @foreach ($job->leaders as $leader)
-                                   @if ($leader->status != 2)
-                                     <span class="label label-success">{{$leader->user}}</span>, 
-                                   @endif
-                                @endforeach
-
-                            @endif
-                        @endif
-                        {{-- buat 3 --}}
-                        @elseif($job->leader->status == 1)
-                          {{-- @if (!empty($job->users)) --}}
-                            @foreach ($job->users as $user)
-                              <span class="label label-success">{{$user->user}}</span>
-                            @endforeach
-                        {{-- @endif --}}
-                      @endif
               <p>Judul : {{$job->title}}</p>
               <p>Tanggal Pemberian Tugas : {{$job->time}}</p>
               <p>Batas : {{$job->deadLine}}</p>
@@ -91,7 +51,7 @@
               
             </div>
             <!-- /.box-body -->
-            <div class="box-footer box-comments">
+            {{-- <div class="box-footer box-comments">
               @foreach ($job->comments as $jobb)
               <div class="box-comment">
                
@@ -125,9 +85,9 @@
         
                 
               </form>
-            </div>
+            </div> --}}
           <!-- /.box -->
-        </div>
+        {{-- </div> --}}
 </div></div>
 </section>
 
