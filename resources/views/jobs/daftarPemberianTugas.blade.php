@@ -1,5 +1,4 @@
-
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Daftar Pemberian Tugas')
 @section('conten')
 	<section class="content">
@@ -7,7 +6,6 @@
 		<div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Daftar Pemberian Tugas</h3>
-
             </div>
             <!-- /.box-header -->
              <div class="box-body">
@@ -22,86 +20,47 @@
                     <th>Waktu Pemberian Tugas</th>
                     <th>Batas Waktu</th>
                     <th>Status</th>
-                    <th>Aksi</th>
+                    <th>Jenis Tugas</th>
+                    <th >Aksi</th>
                   </tr>
                   </thead>
-                  <tbody>
-                    @php
+                   @php
                       $no = 1;
                     @endphp
+                  <tbody>
                     @foreach ($jobs as $job)
-                    @if ($job->isOwner())
-                    @if ($job->status != 'Acc')
+                     
                   <tr>
-                    <td><a href="#">{{$no}}</a></td>
-                    
-                    <td>
-                      
-                      @if ($job->leader->status == 3)
-
-                        @if (!empty($job->users))
-                          @foreach ($job->users as $user)
-                            <span class="label label-success">{{$user->user}}</span>
-                          @endforeach
-                          @endif
-
-                          @if (!empty($job->leaders))
-                           
-                               @foreach ($job->leaders as $leader)
-                                <span class="label label-success">{{$leader->user}}</span>
-                              @endforeach
-
-
-                      @endif
-                      {{-- buat status 2 --}}
-                       @elseif($job->leader->status == 2)
-                        @if (!empty($job->users))
-                            @foreach ($job->users as $user)
-                              <span class="label label-success">{{$user->user}}</span>
-                            @endforeach
-                        @endif
-
-                        @if (!empty($job->leaders))
-                            @if ($job->leaders->count() > 1)
-                                @foreach ($job->leaders as $leader)
-                                   @if ($leader->status != 2)
-                                     <span class="label label-success">{{$leader->user}}</span>, 
-                                   @endif
-                                @endforeach
-
-                            @endif
-                        @endif
-                        {{-- buat 3 --}}
-                        @elseif($job->leader->status == 1)
-                          {{-- @if (!empty($job->users)) --}}
-                            @foreach ($job->users as $user)
-                              <span class="label label-success">{{$user->user}}</span>
-                            @endforeach
-                        {{-- @endif --}}
-                      @endif
-                    </td>
-                    <td>{{$job->title}}</td>
-                    <td>
-                      <div class="sparkbar"  data-height="20">{{$job->time}}</div>
-                    </td>
-
-                    <td>
-                      <div class="sparkbar"  data-height="20">{{$job->deadLine}}</div>
-                    </td>
-
-                     <td>{{$job->status}}</td>
-
-                    <td><a href="delete/{{$job->id}}" onclick="return confirm('Apakah Anda Yakin Ingin Mengapus Kerjaan ini ?')" class="btn btn-danger">Hapus</a> || <a href="edit/{{$job->id}}" class="btn btn-primary">Ubah</a></td>
-                  </tr>
+                    <td><a >{{$no}}</a></td>
                     @php
                       $no++;
                     @endphp
-                    @endif
-                    @endif
-                    @endforeach
-                  
+                    <td>
+                      @foreach ($job->users as $user)
+                        {{$user->name}},
+                      @endforeach
+                      
+                    </td>
+                    <td>{{$job->title}}</td>
+                    <td>{{$job->time}}</td>
+                    <td>{{$job->deadLine}}</td>
+                    
+                    <td>
+                      @if ($job->status == 'belum')
+                        Belum Selesai
+                      @endif
+                    </td>
+                    <td>{{$job->level}}</td>
+                    
+                    <td><a href="/rincian/{{$job->slug}}" class="btn btn-success"">Acc</a>
+                    <a href="/rincian/{{$job->slug}}" class="btn btn-warning"">Edit</a>
+                    <a href="/hapus-tugas/{{$job->id}}" class="btn btn-danger"">Hapus</a>
+                    <a href="/rincian/{{$job->slug}}" class="btn btn-info"">Lihat</a></td>
+                    
+                    @endforeach      
                   </tbody>
                 </table>
               </div>
 	</section>
 @endsection
+

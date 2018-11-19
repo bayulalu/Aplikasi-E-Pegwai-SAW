@@ -15,7 +15,7 @@ Route::group(['middleware' => 'guest'], function(){
 Route::group(['middleware' => 'auth'], function(){
 
 	// pendaftaran pegawai
-	Route::get('/daftar-pegawai', 'AuthController@create');
+	Route::get('/daftar-pegawai', 'AuthController@create')->name('daftar');
 	Route::post('/daftar-pegawai', 'AuthController@store')->name('daftar');
 
 	// pemberian tugas
@@ -23,6 +23,11 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/rincian/{id}', 'jobController@show');
 	Route::get('/pemberian-tugas', 'jobController@create')->name('job');
 	Route::post('/pemberian-tugas', 'jobController@store')->name('job');
+	Route::get('/daftar-pemberian-tugas', 'jobController@listJob')->name('listJob');
+
+	// hapus tugas yang di berikan tadi
+	Route::get('/hapus-tugas/{id}', 'jobController@delete');
+	// Route::get('/hapus/{slug}', 'jobController@delete')
 
 	// Logout
 	Route::get('/logout', 'AuthController@logout')->name('logout');

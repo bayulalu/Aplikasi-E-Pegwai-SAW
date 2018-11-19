@@ -37,6 +37,8 @@
                   <label>Bidang</label>
                   <select class="form-control" name="sector">
                     <option>Pilih</option>
+                    <option>Kepala Dinas</option>
+                    <option>============</option>
                     <option>Sekertaris</option>
                     <option>Program</option>
                     <option>Keuangan</option>
@@ -73,6 +75,7 @@
                   <label>Eslon</label>
                  <select class="form-control" name="eslon">
                     <option>Pilih</option>
+                    <option>2</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option> 

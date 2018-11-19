@@ -24,6 +24,8 @@
 
   <link rel="stylesheet" type="text/css" href="{{ asset('css/costume.css') }}">
 
+  <link rel="stylesheet" href="{{ asset('asset/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -181,7 +183,7 @@
             <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Daftar Tugas</a></li>
             {{-- @endif --}}
 
-            <li><a href="{{-- {{ route('perberianJob') }} --}}"><i class="fa fa-book"></i>Daftar Pemberian Tugas</a></li>
+            <li><a href="{{ route('listJob') }}"><i class="fa fa-book"></i>Daftar Pemberian Tugas</a></li>
             
             <li><a href="{{-- {{route('history')}} --}}"><i class="fa fa-eyedropper"></i>Riwayat</a></li>
             
@@ -285,6 +287,8 @@
 <script src="{{ asset('asset/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('asset/dist/js/demo.js') }}"></script>
+<script src="{{ asset('asset/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('asset/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
 {{-- <script>
 $('document').ready(function(){
@@ -302,6 +306,10 @@ $('document').ready(function(){
 </script> --}}
 
 @yield('skereip')
+
+
+
+</script>
 </body>
 </html>
 

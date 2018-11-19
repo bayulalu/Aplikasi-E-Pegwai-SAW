@@ -67,4 +67,23 @@ class jobController extends Controller
         $job = Job::where('slug', $slug)->first(); 
         return view('jobs.singgle', compact('job'));
     }
+
+    public function delete($id)
+    {
+        $job = Job::findOrFail($id);  
+        $job->delete();
+        $job->users()->detach($id);
+
+        return redirect()->route('listJob');
+    }
+
+    public function listJob()
+    {
+        $owner = Auth::user()->id;
+        $jobs = Job::with('users')->where('user_id', $owner)->orderBy('id', 'desc')->get();
+
+        return view('jobs.daftarPemberianTugas', compact('jobs'));
+    }
+
+
 }

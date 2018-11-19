@@ -65,7 +65,7 @@ class AuthController extends Controller
       ]);
 
        // die('hard');
-       // return redirect()->name('beranda');
+       return redirect()->route('daftar');
     }
 
     public function group($request){
