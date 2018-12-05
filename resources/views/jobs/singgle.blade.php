@@ -1,8 +1,18 @@
 @extends('layouts.master')
 @section('title', 'Tugas')
  
+ 
 @section('conten')
-
+<script src="{{ asset('asset/tinymce/js/tinymce/tinymce.min.js') }}
+"></script>
+<script type="text/javascript">
+    tinymce.init({
+      selector : '#tinytextarea',
+      menubar : false,
+      plugins : 'codesample,image,jbimages',
+      toolbar  : 'bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontselect, fontsizeselect, bullist'
+    });
+ </script>
 <section class="content">
 <div class="row">
 	<div class="jarak"></div>
@@ -97,9 +107,25 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               <form>
-                <textarea class="textarea" 
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              </form>
+               <div class="form-group">
+                  <label>Keterangan</label>
+                  <textarea name="ket" class="form-control" rows="3" placeholder="Ket" id="tinytextarea">{{old('ket')}}</textarea>
+                  @if ($errors->has('ket'))
+                    <span >
+                        <p id="bintang">{{ $errors->first('ket') }}</p>
+                    </span>
+                  @endif
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 col-sm-offset-9">
+                    
+                <div class="form-group">
+                  <button type="submit" class="btn btn-block btn-primary btn-sm">Kirim</button>
+                  
+                </div>
+                  </div>
+                </div>
+                </form>
             </div>
           </div>
               {{--  --}}
@@ -114,20 +140,11 @@
 @section('skereip')
   <script>
   $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    // CKEDITOR.replace('editor1')
-    //bootstrap WYSIHTML5 - text editor
-    // $('.textarea').wysihtml5()
-
-    $('.textarea').wysihtml5({
-      "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
-      "emphasis": false, //Italics, bold, etc. Default true
-      "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-      "html": false, //Button which allows you to edit the generated HTML. Default false
-      "link": false, //Button to insert a link. Default true
-      "image": false, //Button to insert an image. Default true,
-      "color": false //Button to change color of font  
+    tinymce.init({
+      selector : '#tinytextarea',
+      menubar : false,
+      plugins : 'codesample,image,jbimages',
+      toolbar  : 'bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontselect, fontsizeselect, bullist'
     });
   })
 </script>

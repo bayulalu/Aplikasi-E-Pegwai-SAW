@@ -53,7 +53,7 @@
                     <td>{{$job->level}}</td>
                     
                     <td><a href="/rincian/{{$job->slug}}" class="btn btn-success"">Acc</a>
-                    <a href="/rincian/{{$job->slug}}" class="btn btn-warning"">Edit</a>
+                    <a href="/pemberian-tugas/{{$job->id}}/edit" class="btn btn-warning">Edit</a>
                     <a href="/hapus-tugas/{{$job->id}}" class="btn btn-danger"">Hapus</a>
                     <a href="/rincian/{{$job->slug}}" class="btn btn-info"">Lihat</a></td>
                     

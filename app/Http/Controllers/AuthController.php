@@ -16,13 +16,19 @@ class AuthController extends Controller
 
 	public function postLogin(Request $request)
 	{
+
+    $this->validate($request, [
+          'user' => 'required',
+          'password' => 'required' 
+      ]);
+
+
 		$users = auth()->attempt(['user' => $request->user, 'password' => $request->password ]);
 
 	   	if (!$users) {
-	        return redirect()->back();
+	        return redirect()->back()->withInput($request->only('user', 'password'));
 	    }
 
-      // die('hard');
       return redirect()->route('beranda');
 	}
 

@@ -20,8 +20,10 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <form  method="post" action="{{route('job')}}" enctype="multipart/form-data">
+        <form  method="post" action="/pemberian-tugas/{{$job->id}}" enctype="multipart/form-data">
           {{csrf_field()}}
+          <input type="hidden" name="_method" value="PUT">
+          
           <div class="row">
             
             <!-- /.col -->
@@ -43,12 +45,6 @@
                       <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>Kasi
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @endif
-
-                    {{-- @if($usr->eslon == 4)
-                     <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>setaf
-                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    @endif --}}
                     
                     <label>
                       <input type="radio" checked name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
@@ -169,7 +165,7 @@
            <div class="form-group">
                 <div class="form-group">
                   <label>Judul</label>
-                  <input type="text" class="form-control" placeholder="Judul" name="title" value="{{old('title')}}">
+                  <input type="text" class="form-control" placeholder="Judul" name="title" value="{{old('title') ? old('title') : $job->title}}">
                   @if ($errors->has('title'))
                     <span >
                         <p id="bintang">{{ $errors->first('title') }}</p>
@@ -180,7 +176,7 @@
               <br>
               <div class="form-group">
                   <label>Keterangan</label>
-                  <textarea name="ket" class="form-control" rows="3" placeholder="Ket" id="tinytextarea">{{old('ket')}}</textarea>
+                  <textarea name="ket" class="form-control" rows="3" placeholder="Ket" id="tinytextarea">{{old('ket') ? old('ket') : $job->ket}}</textarea>
                   @if ($errors->has('ket'))
                     <span >
                         <p id="bintang">{{ $errors->first('ket') }}</p>

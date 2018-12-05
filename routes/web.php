@@ -27,7 +27,11 @@ Route::group(['middleware' => 'auth'], function(){
 
 	// hapus tugas yang di berikan tadi
 	Route::get('/hapus-tugas/{id}', 'jobController@delete');
-	// Route::get('/hapus/{slug}', 'jobController@delete')
+
+	// edit tugas 
+	Route::get('/pemberian-tugas/{id}/edit', 'jobController@edit');
+	Route::put('/pemberian-tugas/{id}', 'jobController@update');
+	
 
 	// Logout
 	Route::get('/logout', 'AuthController@logout')->name('logout');

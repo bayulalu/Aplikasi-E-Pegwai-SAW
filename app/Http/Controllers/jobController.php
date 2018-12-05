@@ -85,5 +85,37 @@ class jobController extends Controller
         return view('jobs.daftarPemberianTugas', compact('jobs'));
     }
 
+    public function edit($id)
+    {
+        $usr = Auth::user();
+        $job = Job::findOrFail($id);
+
+        if ($job->isOwner()) { 
+            
+            if ($usr->eslon == 2) {
+                $users = User::all();
+            }elseif($usr->eslon == 3){
+                $users = User::where('group2', $usr->sector)->where('eslon','>=', 4)->get();
+            }elseif($usr->eslon == 4){
+                $users = User::where('group1', $usr->sector)->where('eslon','>=', 5)->get();
+               
+            }
+
+            date_default_timezone_set('Asia/Makassar');
+
+            $date = date('Y-m-d');
+            return view('jobs.editTugas', compact('usr', 'users', 'date', 'job'));
+         }else{
+            // abort(403);
+            dd('hard');
+        }
+
+    }
+
+    public function update($id)
+    {
+        dd("tes ". $id);
+    }
+
 
 }

@@ -1,0 +1,49 @@
+body{
+	padding: 17rem;
+	background-image: url("../img/bg.jpg") !important;
+	background-size: cover !important;
+}
+.login h2{
+	text-align: center;
+	margin-bottom: 3rem;
+	color: hsl(0, 0%, 100%);	
+}
+
+
+.login-box-body{
+	background-color: rgba(0, 74, 127, 0.7); 
+	border-radius: 1.8rem;
+
+}
+.login-box-body input{
+	border-radius: 1rem;
+	box-shadow: 0px 0px 20px grey;
+	margin-bottom: 1.5rem;
+	border:none;
+
+}
+.login-box-body input:focus{
+	border: 2px solid grey;
+	height: 40px;
+	font-size: 20px; 
+}
+
+
+.login-box-body .tombol{
+	margin-top: 10px; 
+	margin-bottom:20px;
+}
+.login-box-body button{
+	border-radius: 1rem !important;
+	border: none;
+}
+.login-box-body button:hover{
+	background-color: #0A76F4;
+	border: 1px solid black;
+}
+
+/*false*/
+#bintang{
+	margin-top: -10px !important;
+	color: pink;
+}
