@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth'], function(){
 	// edit tugas 
 	Route::get('/pemberian-tugas/{id}/edit', 'jobController@edit');
 	Route::put('/pemberian-tugas/{id}', 'jobController@update');
+
+	// tanggapan(Komentar) tugas 
+	Route::post('/tanggapan-tugas/{id}', 'CommentController@comment');
 	
 
 	// Logout

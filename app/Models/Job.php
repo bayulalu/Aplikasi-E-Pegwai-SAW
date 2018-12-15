@@ -26,4 +26,9 @@ class Job extends Model
 
       return Auth::user()->id == $this->user_id;
     }
+
+    public function comments()
+    {
+      return $this->hasMany('App\Models\Comment');
+    }
 }

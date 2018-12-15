@@ -61,15 +61,30 @@
               <!-- Social sharing buttons -->
               
             </div>
-            <!-- /.box-body -->
-           {{--  <div class="box-footer box-comments">
+            
+            <div class="box-footer">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Tanggapan
+                
+              </h3>
+             
+              <!-- /. tools -->
+            </div>
+
+            <div class="box-footer box-comments">
               @foreach ($job->comments as $jobb)
+             
               <div class="box-comment">
                
                 <div class="comment-text">
-                   <b>{{$jobb->name}}</b><br>
-                     {{$jobb->conten}}
-                      
+                   <b>{{$jobb->user->name}}</b><br>
+                   {{-- <b>Bayu</b> --}}
+                   @php
+                     echo $jobb->conten
+                   @endphp
+                     
+                     
                 </div>
                 <!-- /.comment-text -->
               </div>
@@ -77,42 +92,19 @@
               <!-- /.box-comment -->
            
               <!-- /.box-comment -->
-            </div> --}}
-                      <!-- /.box-footer -->
-            <div class="box-footer">
-              {{-- <form action="/ketuaDevisi/comment/{{$job->id}}" method="POST">
-                {{csrf_field()}}
-                <div class="input-group">
-                  <input type="text" name="tanggapan" placeholder="Tanggapi" class="form-control">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary btn-flat">kirim</button>
-                      </span>
-                </div>
-
-                @if ($errors->has('tanggapan'))
-                  <span class="invalid-feedback" id="bintang">{{ $errors->first('tanggapan') }}</span>
-                @endif
-
-        
-                
-              </form> --}}
-              <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Tanggapan
-                {{-- <small>Simple and fast</small> --}}
-              </h3>
-             
-              <!-- /. tools -->
             </div>
+
+
             <!-- /.box-header -->
             <div class="box-body pad">
-              <form>
+              <form action="/tanggapan-tugas/{{$job->id}}" method="POST">
                <div class="form-group">
+                {{csrf_field()}}
                   <label>Keterangan</label>
-                  <textarea name="ket" class="form-control" rows="3" placeholder="Ket" id="tinytextarea">{{old('ket')}}</textarea>
-                  @if ($errors->has('ket'))
+                  <textarea name="tanggapan" class="form-control" rows="3" placeholder="Ket" id="tinytextarea">{{old('tanggapan')}}</textarea>
+                  @if ($errors->has('tanggapan'))
                     <span >
-                        <p id="bintang">{{ $errors->first('ket') }}</p>
+                        <p id="bintang">{{ $errors->first('tanggapan') }}</p>
                     </span>
                   @endif
                 </div>

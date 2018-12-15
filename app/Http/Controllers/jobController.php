@@ -20,7 +20,7 @@ class jobController extends Controller
     public function create()
     {
         $usr = Auth::user();
-        // $users = '';
+
     	
         if ($usr->eslon == 2) {
             $users = User::all();
@@ -117,5 +117,6 @@ class jobController extends Controller
         dd("tes ". $id);
     }
 
+   
 
 }
