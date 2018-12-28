@@ -13,6 +13,8 @@
   </script>
  <section class="content">
 
+
+  
       <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
         <div class="box-header with-border">
@@ -36,22 +38,19 @@
                    <div class="radio">
                     @if($usr->eslon == 2)
                       <label>
-                        <input type="radio" name="type" id="optionsRadios2" value="kabit"  class="jabtan" {{old('type') == "kabit" ? 'checked='.'"'.'checked'.'"' : '' }}>Kabit 
+                        <input type="radio" name="type" id="optionsRadios2" value="kabit"  class="jabtan" {{$job->kind == "kabit" ? 'checked='.'"'.'checked'.'"' : '' }}>Kabit 
                       </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @endif
 
                     @if($usr->eslon <= 3)
                      <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>Kasi
+                      <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{$job->kind == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>Kasi
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @endif
                     
                     <label>
-                      <input type="radio" checked name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
+                      <input type="radio"  name="type" id="optionsRadios2" value="staf"  class="jabtan" {{ $job->kind == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
                     </label>
-                    
-                  {{-- </div> --}}
-                  {{-- <div class="radio"> --}}
                    
                   </div>
 
@@ -66,7 +65,12 @@
                         style="width: 100%;">
                         <option disabled>Pilih</option>
                 @foreach($users->where('eslon', 3) as $user)
-                    <option value="{{$user->id}}">{{$user->name. ' - '. $user->sector}}</option>
+                    <option value="{{$user->id}}" 
+                        @foreach ($job->users as $job_use)  @if ($job_use->id === $user->id)
+                        selected 
+                @endif @endforeach
+                >{{$user->name. ' - '. $user->sector}}</option>
+                    
                 @endforeach
                 </select>
                  @if ($errors->has('sectors'))
@@ -82,7 +86,11 @@
                 <label>Pilih Kasi </label>
                 <select id="kasi" class="form-control select2" style="width: 100%;" name="sectors[]" multiple="multiple" data-placeholder="Nama" >
                     @foreach($users->where('eslon', 4) as $user)
-                      <option value="{{$user->id}}">{{$user->name. ' - '. $user->sector}}</option>
+                      <option value="{{$user->id}}" 
+                        @foreach ($job->users as $job_use)  @if ($job_use->id === $user->id)
+                        selected 
+                @endif @endforeach
+                >{{$user->name. ' - '. $user->sector}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('sectors'))
@@ -99,7 +107,11 @@
                 <select   class="form-control select2" name="sectors[]" id="staf" multiple="multiple" data-placeholder="Nama"
                         style="width: 100%;">
                       @foreach ($users->where('eslon', 5) as $user)
-                           <option value="{{$user->id}}">{{$user->name. ' - '. $user->sector}}</option>
+                        <option value="{{$user->id}}" 
+                        @foreach ($job->users as $job_use)  @if ($job_use->id === $user->id)
+                        selected 
+                @endif @endforeach
+                >{{$user->name. ' - '. $user->sector}}</option>
                       @endforeach
                 </select>
                  @if ($errors->has('sectors'))
@@ -124,7 +136,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker2" value="{{$date}}" name="waktuSekarang">
+                  <input type="text" class="form-control pull-right" id="datepicker2" value="{{$job->time}}" name="waktuSekarang">
 
                 </div>
               </div>
@@ -136,7 +148,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="batasWaktu" value="{{old('batasWaktu')}}">
+                  <input type="text" class="form-control pull-right" id="datepicker" name="batasWaktu" value="{{$job->deadLine}}">
                   @if ($errors->has('batasWaktu'))
                     <span >
                         <p id="bintang">{{ $errors->first('batasWaktu') }}</p>
@@ -146,14 +158,22 @@
               </div>
 
                 <div class="form-group">
-                  <label>Jenis Tugas</label>
+                  <label>Jenis Tugas </label>
                   <select class="form-control level" name="level">
-                    <option checked id="levelPilih">Pilih</option>
-                    <option >Ringan</option>
-                    <option>Sedang</option>
-                    <option>Sulit</option>
+                    <option @if ($job->level == 'Ringan')
+                      selected 
+                    @endif>Ringan</option>
+                    <option @if ($job->level == "Sedang")
+                      selected
+                    @endif>Sedang</option>
+                    <option @if ($job->level == "Sulit")
+                      selected 
+                    @endif >Sulit</option>
                   </select>
                 </div>
+
+
+
               </div>
             </div>
           </div>

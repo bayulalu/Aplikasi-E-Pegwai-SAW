@@ -2,11 +2,12 @@
 
 
 
-Route::get('/', function () {
-    return view('authh.login');
-});
+
 
 Route::group(['middleware' => 'guest'], function(){
+	Route::get('/', function () {
+	    return view('authh.login');
+	});
 	Route::get('/login', 'AuthController@login')->name('login');
 	Route::post('/login', 'AuthController@postLogin')->name('login');
 });

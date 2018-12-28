@@ -31,4 +31,9 @@ class Job extends Model
     {
       return $this->hasMany('App\Models\Comment');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notif');
+    }
 }

@@ -1,7 +1,31 @@
 @extends('layouts.master')
 @section('title', 'Daftar Pemberian Tugas')
 @section('conten')
+<style type="text/css">
+  .tess{
+    position: fixed ;
+    width: 200px;
+     z-index: 1;
+     background-color:rgba(91, 183, 71, 0.7) !important;
+     /*color: black !important;*/
+    /*no-repeat fixed right*/
+  }
+</style>
+<div class="row">
+      <div class="col-md-4"></div>  
+      <div class="col-md-4"></div>  
+      <div class="col-md-4">
+        <div class="alert alert-success alert-dismissible tess">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i> Berhasil</h4>
+          Data Berhasil Diubah
+        </div>
+      </div>  
+    </div>
 	<section class="content">
+    
+    
+
 		<h1 class="text-center">Daftar Pemberian Tugas</h1>
 		<div class="box box-info">
             <div class="box-header with-border">

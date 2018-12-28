@@ -13,6 +13,14 @@
   </script>
  <section class="content">
 
+@if (session('msg'))
+  <div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4><i class="icon fa fa-check"></i> Berhasil</h4>
+    Pemberian Tugas Berhasil
+  </div>
+@endif
+
       <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
         <div class="box-header with-border">
@@ -24,6 +32,8 @@
           {{csrf_field()}}
           <div class="row">
             
+
+
             <!-- /.col -->
             <div class="col-md-6">
              <label>Apakah Anda Ingin Meneruskan Tugas ini ? </label>
@@ -44,12 +54,6 @@
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @endif
 
-                    {{-- @if($usr->eslon == 4)
-                     <label>
-                      <input type="radio" name="type" id="optionsRadios2" value="kasi" class="jabtan" {{old('type') == "kasi" ? 'checked='.'"'.'checked'.'"' : '' }}>setaf
-                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    @endif --}}
-                    
                     <label>
                       <input type="radio" checked name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
                     </label>

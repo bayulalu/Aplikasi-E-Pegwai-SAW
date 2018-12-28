@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Job;
 use App\Models\User;
+use App\Models\Notif;
 use Illuminate\Http\Request;
 
 
@@ -13,14 +14,13 @@ class jobController extends Controller
     public function index()
     {
     	$jobs = Job::with('users')->orderBy('id', 'desc')->get();
-        // dd($jobs);
+       
     	return view('jobs.beranda', compact('jobs'));
     }
 
     public function create()
     {
         $usr = Auth::user();
-
     	
         if ($usr->eslon == 2) {
             $users = User::all();
@@ -28,7 +28,6 @@ class jobController extends Controller
             $users = User::where('group2', $usr->sector)->where('eslon','>=', 4)->get();
         }elseif($usr->eslon == 4){
             $users = User::where('group1', $usr->sector)->where('eslon','>=', 5)->get();
-           
         }
 
     	date_default_timezone_set('Asia/Makassar');
@@ -40,6 +39,17 @@ class jobController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+          'type' => 'required',
+          'sectors' => 'required',
+          'waktuSekarang' => 'required',
+          'batasWaktu' => 'required',
+          'level' => 'required',
+          'title' => 'required',
+          'ket' => 'required',
+
+         ]);
+
         $user = Auth::user();
         
         $slug = $slug = str_slug($request->judul.time(), '-');
@@ -56,9 +66,18 @@ class jobController extends Controller
             'user_id' => $user->id
         ]); 
 
-        // dd($request->sectors);
         $job->users()->attach($request->sectors);
-        die('sukses');
+
+        foreach ($request->sectors as $sector) {
+            Notif::create([
+                'subject' => 'Tugas dari '. Auth::user()->name .' '.$request->title,
+                'seen' => '0',
+                'job_id' => $job->id,
+                'user_id' => $sector
+            ]);
+        }
+
+        return redirect()->route('job')->with('msg','Data Berhasil Di Simpan');
 
     }
 
@@ -106,16 +125,55 @@ class jobController extends Controller
             $date = date('Y-m-d');
             return view('jobs.editTugas', compact('usr', 'users', 'date', 'job'));
          }else{
-            // abort(403);
             dd('hard');
         }
 
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        dd("tes ". $id);
+         $this->validate($request, [
+          'type' => 'required',
+          'sectors' => 'required',
+          'waktuSekarang' => 'required',
+          'batasWaktu' => 'required',
+          'level' => 'required',
+          'title' => 'required',
+          'ket' => 'required',
+
+         ]);
+
+        $user = Auth::user();
+
+        $job = Job::findOrFail($id);         
+        $job->update([
+            'title' => $request->title,
+            'level' => $request->jenisTugas,
+            'ket' => $request->ket,
+            'time' => $request->waktuSekarang,
+            'deadLine' => $request->batasWaktu,
+            'level' => $request->level,
+            'kind' => $request->type
+        ]);
+        
+        $job->users()->sync($request->sectors);
+        die('sukeses');
     }
+
+    // notif
+    //  public function notif($leaders, $users, $title, $id_job){
+
+    //         foreach ($leaders as $leader) {
+    //             Notif::create([
+    //                 'subject' => 'Tugas dari '. Auth::user()->user .' '.$title,
+    //                 'notifable_id' => $leader->id,
+    //                 'seen' => '0',
+    //                 'notifable_type' => 'App\Models\Leader',
+    //                 'job_id' => $id_job
+    //             ]);
+            
+    //         }
+    // }
 
    
 

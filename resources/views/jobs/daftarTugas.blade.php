@@ -2,6 +2,8 @@
 @section('title', 'Daftar Tugas')
 @section('conten')
     <section class="content">
+
+     
       <!-- Small boxes (Stat box) -->
       <!-- TABLE: LATEST ORDERS -->
           <div class="box box-info">
