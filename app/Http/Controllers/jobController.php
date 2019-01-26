@@ -157,7 +157,21 @@ class jobController extends Controller
         ]);
         
         $job->users()->sync($request->sectors);
-        die('sukeses');
+        return redirect()->route('listJob')->with('msg','Data Berhasil Di Ubah');
+    }
+
+    public function acc($id)
+    {
+        $job = Job::findOrFail($id); 
+        // $user = Auth::user();
+
+        // $this->notifAcc($job, $user);
+
+            
+        $job->update([
+            'status' => 'Acc',
+        ]);
+        return redirect('/daftar-pemberian-tugas');
     }
 
     // notif

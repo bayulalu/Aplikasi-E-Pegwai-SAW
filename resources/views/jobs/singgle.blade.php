@@ -100,7 +100,7 @@
               <form action="/tanggapan-tugas/{{$job->id}}" method="POST">
                <div class="form-group">
                 {{csrf_field()}}
-                  <label>Keterangan</label>
+                  <label>Tanggapi</label>
                   <textarea name="tanggapan" class="form-control" rows="3" placeholder="Ket" id="tinytextarea">{{old('tanggapan')}}</textarea>
                   @if ($errors->has('tanggapan'))
                     <span >

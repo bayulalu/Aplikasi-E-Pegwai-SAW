@@ -65,29 +65,29 @@
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="btn">
               <i class="fa fa-bell-o"></i>
-              {{-- @if (Auth::user()->notifs()->where('seen', '0')->count() != 0)
-                <span class="label label-warning hapus">{{Auth::user()->notifs()->where('seen', '0')->count()}}</span>
-              @endif --}}
+              @if (Auth::user()->notifications()->where('seen', '0')->count() != 0)
+                <span class="label label-warning hapus">{{Auth::user()->notifications()->where('seen', '0')->count()}}</span>
+              @endif
             </a>
             <ul class="dropdown-menu">
 
-              <li class="header">Anda Memiliki 5 {{-- {{Auth::user()->notifs()->where('seen', '0')->count()}} --}} Pemberitahuan</li>
+              <li class="header">Anda Memiliki  {{Auth::user()->notifications()->where('seen', '0')->count()}} Pemberitahuan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   
-                  {{-- @foreach (Auth::user()->notifs()->orderBy('id', 'desc')->limit(5)->get() as $notif) --}}
+                  @foreach (Auth::user()->notifications()->orderBy('id', 'desc')->limit(5)->get() as $notif)
                    
                   <li>
-                    <a href="/ketuaDevisi/job/{{-- {{$notif->job->slug}} --}}">
-                      <i class="fa fa-file-text-o text-aqua"></i>{{-- {{$notif->subject}} --}}
+                    <a href="/rincian/{{$notif->job->slug}}">
+                      <i class="fa fa-file-text-o text-aqua"></i>{{$notif->subject}}
                     </a>
                   </li>
 
-                  {{-- @endforeach --}}
+                  @endforeach
                 </ul>
               </li>
-              <li class="footer"><a href="{{-- {{route('notifikasi')}} --}}">Lihat Semua Pemberitauan</a></li>
+              <li class="footer">{{-- <a href="{{route('notifikasi')}}">Lihat Semua Pemberitauan</a> --}}</li>
             </ul>
           </li>
           
@@ -162,7 +162,10 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         {{-- <li class="header">MAIN NAVIGATION</li> --}}
+          {{-- expr --}}
+        
         <li>
+        @if (Auth::user()->group1 != 'admin')
           <a href="{{route('beranda')}}">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
@@ -177,7 +180,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            @if (Auth::user()->eslon < 5 )
+              {{-- expr --}}
             <li><a href="{{route('job')}}"><i class="fa  fa-archive"></i>Pemberian Tugas</a></li>
+            @endif
             
             {{-- @if (Auth::user()->status != 3) --}}
             <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Daftar Tugas</a></li>
@@ -188,8 +194,11 @@
             <li><a href="{{-- {{route('history')}} --}}"><i class="fa fa-eyedropper"></i>Riwayat</a></li>
             
           </ul>
+          @endif
         </li>
         {{-- auth --}}
+        
+        @if (Auth::user()->group1 == 'admin')
          <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -202,7 +211,7 @@
             <li><a href="{{-- {{route('job')}} --}}"><i class="fa  fa-archive"></i>Masukan Pegawai</a></li>
             
             {{-- @if (Auth::user()->status != 3) --}}
-            <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Daftar Pegawai</a></li>
+            
             {{-- @endif --}}
 
             <li><a href="{{-- {{ route('perberianJob') }} --}}"><i class="fa fa-book"></i>Masukan Daftar Hadir</a></li>
@@ -210,8 +219,8 @@
             <li><a href="{{-- {{route('history')}} --}}"><i class="fa fa-eyedropper"></i>Altenatif Pegawai Terbaik</a></li>  
           </ul>
         </li>
+        @endif
       
-
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -221,8 +230,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{-- {{route('job')}} --}}"><i class="fa  fa-archive"></i>Info Tunjangan</a></li>
-            
+            <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Info Daftar Pegawai</a></li>
+                        
             {{-- @if (Auth::user()->status != 3) --}}
             <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Info Pegawai Berperstasi</a></li>
             {{-- @endif --}}
@@ -290,12 +299,12 @@
 <script src="{{ asset('asset/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('asset/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
-{{-- <script>
+<script>
 $('document').ready(function(){
 
       $('#btn').click(function(){
       $.ajax({
-        url : '/ketuaDevisi/notif',
+        url : 'seen',
         method : 'GET',
       }).done(function(hasil){
         $('.hapus').remove();
@@ -303,13 +312,11 @@ $('document').ready(function(){
         
       });
     });
-</script> --}}
+</script>
 
 @yield('skereip')
-
 
 
 </script>
 </body>
 </html>
-

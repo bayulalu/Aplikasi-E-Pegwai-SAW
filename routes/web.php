@@ -33,12 +33,28 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/pemberian-tugas/{id}/edit', 'jobController@edit');
 	Route::put('/pemberian-tugas/{id}', 'jobController@update');
 
+	// Acc
+	Route::get('/acc/{id}', 'jobController@acc');
+
 	// tanggapan(Komentar) tugas 
 	Route::post('/tanggapan-tugas/{id}', 'CommentController@comment');
+
+
 	
+
+	// update notifikasi 
+	Route::get('seen', 'NotifController@seen');
 
 	// Logout
 	Route::get('/logout', 'AuthController@logout')->name('logout');
+
+	// ====  SPK =====
+
+	// alternatif
+
+	// Route
+
+
 });
 
 

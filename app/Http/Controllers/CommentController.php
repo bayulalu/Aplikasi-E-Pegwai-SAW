@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Comment;
 use Auth;
+use App\Models\Notif;
+use App\Models\Job;
+use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -15,13 +17,36 @@ class CommentController extends Controller
         ]);
 
     	$user = Auth::user();
+        $job = Job::findOrFail($id);
 
-    	$comment = Comment::create([
+        // dd($job->users->user);
+
+        $comment = Comment::create([
             'conten' => $request->tanggapan,
             'job_id' => $id,
             'user_id' => $user->id
         ]);
 
-       	dd('hard');
+        if ($job->user->id != Auth::user()->id) {
+            Notif::create([
+                'subject' => 'Ada tanggapan dari '. Auth::user()->name,
+                'user_id' => $job->user->id,
+                'job_id' => $id,
+                'seen' => 0
+            ]);
+        }else{
+            foreach ($job->users as $user) {
+                Notif::create([
+                    'subject' => 'Ada tanggapan dari '. Auth::user()->name,
+                    'user_id' => $user->id,
+                    'job_id' => $job->id,
+                    'seen' => 0
+                ]);
+                
+            }
+        }
+        
+        return redirect('rincian/'.$job->slug);
+
     }
 }
