@@ -216,7 +216,7 @@
 
             <li><a href="{{-- {{ route('perberianJob') }} --}}"><i class="fa fa-book"></i>Masukan Daftar Hadir</a></li>
             
-            <li><a href="{{-- {{route('history')}} --}}"><i class="fa fa-eyedropper"></i>Altenatif Pegawai Terbaik</a></li>  
+            <li><a href="{{route('parameter')}}"><i class="fa fa-eyedropper"></i>Parameter </a></li>  
           </ul>
         </li>
         @endif
