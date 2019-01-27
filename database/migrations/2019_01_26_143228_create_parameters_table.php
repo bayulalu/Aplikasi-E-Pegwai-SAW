@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePamatersTable extends Migration
+class CreateParametersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreatePamatersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pamaters', function (Blueprint $table) {
+        Schema::create('parameters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('bobot');
+            $table->string('katagori');
+
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreatePamatersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pamaters');
+        Schema::dropIfExists('parameters');
     }
 }

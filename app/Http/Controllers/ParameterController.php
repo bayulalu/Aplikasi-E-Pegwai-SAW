@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Parameter;
 use Illuminate\Http\Request;
 
 class ParameterController extends Controller
 {
     public function index()
     {
-    	return view('spk.parameterPegawai');
+    	$parameters = Parameter::all();
+    	
+    	return view('spk.parameterPegawai', compact('parameters'));
     }
 }

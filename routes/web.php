@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 Route::group(['middleware' => 'guest'], function(){
 	Route::get('/', function () {
 	    return view('authh.login');
