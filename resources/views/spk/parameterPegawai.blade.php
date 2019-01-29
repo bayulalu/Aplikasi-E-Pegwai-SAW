@@ -86,7 +86,7 @@
                   </thead>
                    
                   <tbody>
-                @foreach ($parameters->where('katagori', 'Perilaku Kaerja') as $parameter)
+                @foreach ($parameters->where('katagori', 'Perilaku Kerja') as $parameter)
                     <tr>
                   <td>{{$no}}</td>
                   @php

@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/parameter', 'ParameterController@index')->name('parameter');
 
 	// alternatif
+	Route::get('/alternatif', 'AlternatifController@index')->name('alternatif');
 
 	// Route
 
