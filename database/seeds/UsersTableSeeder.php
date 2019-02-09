@@ -14,14 +14,14 @@ class UsersTableSeeder extends Seeder
     {
         \App\Models\User::create([
             'nip' => 123,
-            'name'  => str_random(20),
-            'user'  => 'bayu'.str_random(5),
+            'name'  => 'admin',
+            'user'  => 'admin',
             'password'  => bcrypt('123456'),
             'sector' => 'admin',
             'foto' => '',
             'eslon' => 1,
-            'group1' => 'satu',
-            'group2' => 'dua'
+            'group1' => 'admin',
+            'group2' => 'admin'
         ]);
         // for ($i=0; $i <20 ; $i++) { 
         //      \App\Models\User::create([

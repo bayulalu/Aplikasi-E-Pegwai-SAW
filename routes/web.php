@@ -35,9 +35,6 @@ Route::group(['middleware' => 'auth'], function(){
 	// tanggapan(Komentar) tugas 
 	Route::post('/tanggapan-tugas/{id}', 'CommentController@comment');
 
-
-	
-
 	// update notifikasi 
 	Route::get('seen', 'NotifController@seen');
 
@@ -49,6 +46,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 	// alternatif
 	Route::get('/alternatif', 'AlternatifController@index')->name('alternatif');
+	Route::get('masukan-nilai-alternatif/{id}', 'AlternatifController@create')->name('inputAlternatif');
+	Route::post('masukan-nilai-alternatif/{id}', 'AlternatifController@store')->name('inputAlternatif');
 
 	// Route
 

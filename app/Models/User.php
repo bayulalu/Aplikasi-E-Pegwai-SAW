@@ -48,5 +48,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Notif');
     }
 
+    public function parameters(){
+        return $this->belongsToMany('App\Models\Parameter');
+    }
+
 
 }

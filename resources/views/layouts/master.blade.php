@@ -208,14 +208,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{-- {{route('job')}} --}}"><i class="fa  fa-archive"></i>Masukan Pegawai</a></li>
+            <li><a href="{{route('daftar')}}"><i class="fa  fa-archive"></i>Masukan Pegawai</a></li>
             
             {{-- @if (Auth::user()->status != 3) --}}
             
             {{-- @endif --}}
 
-            <li><a href="{{-- {{ route('perberianJob') }} --}}"><i class="fa fa-book"></i>Alternatif</a></li>
-            
+            <li><a href="{{ route('alternatif') }}"><i class="fa fa-book"></i>Alternatif</a></li>
+
+            <li><a href="{{ route('alternatif') }}"><i class="fa fa-book"></i>Daftar Nilai Alternatif</a></li>
+
             <li><a href="{{route('parameter')}}"><i class="fa fa-eyedropper"></i>Parameter </a></li>  
           </ul>
         </li>
