@@ -49,8 +49,10 @@ class User extends Authenticatable
     }
 
     public function parameters(){
-        return $this->belongsToMany('App\Models\Parameter');
+        return $this->belongsToMany('App\Models\Parameter')->withPivot('nilai');
     }
+
+    
 
 
 }

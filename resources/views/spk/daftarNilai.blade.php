@@ -2,29 +2,13 @@
 @extends('layouts.master')
 @section('title', 'Parameter')
 @section('conten')
-<section class="content">
-@if (session('msg'))
-<div class="alert alert-success alert-dismissible">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <h4><i class="icon fa fa-check"></i> Berhasil</h4>
-  Data Berhasil Dimasukan
-</div>
-@endif
   <section class="content-header">
-      <h1>Alternatif Yang Belemu Terisi</h1>    
+      <h1>Nilai Alternatif</h1>    
     </section>
     <section class="content">
       <!-- Small boxes (Stat box) -->    
 
       <!-- TABLE: LATEST ORDERS -->
-      {{-- <form>
-      <select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-      <button class="btn btn-primary">Tampilkan</button>
-      </form> --}}
       
           <div class="box box-info">
             <div class="box-header with-border">
@@ -45,8 +29,15 @@
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>bidang</th>
-                    <th>Aksi</th>
+                    <th>Kualitas</th>
+                    <th>Kuantitas</th>
+                    <th>waktu</th>
+                    <th>Orientasi pelayanan</th>
+                    <th>Integrasi</th>
+                    <th>Komitmen</th>
+                    <th>Disiplin</th>
+                    <th>Kerja sama</th>
+                    <th>kepemimpinan</th>
                   </tr>
                   </thead>
                     @php
@@ -59,11 +50,15 @@
                       @php
                         $no++
                       @endphp
+                      {{-- {{dd($user->jobss)}} --}}
                       <td>{{$user->name}}</td>
-                      <td>{{$user->sector}}</td> 
-                      <td>
-                         <a href="/masukan-nilai-alternatif/{{$user->id}}" class="btn btn-primary">Masukan Nilai </a>
-                       </td>
+                      <td>{{collect($user->jobss)->sum('kualitas')}}</td>
+                     
+                      <td>{{$user->jobss()->count()}}</td>
+                      <td>{{collect($user->jobss)->sum('nwaktu')}}</td>
+                      @foreach ($user->parameters as $prm)
+                          <td>{{$prm->pivot->nilai}}</td>
+                      @endforeach
                     </tr>
                     @endforeach
                   </tbody>

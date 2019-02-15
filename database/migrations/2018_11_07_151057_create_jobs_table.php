@@ -21,7 +21,8 @@ class CreateJobsTable extends Migration
             $table->date('time');
             $table->date('deadLine');
             $table->string('status', 25);
-            $table->string('level', 255);
+            $table->integer('kualitas');
+            $table->integer('nwaktu');
 
             $table->string('kind', 255);
 

@@ -2,33 +2,32 @@
 @extends('layouts.master')
 @section('title', 'Parameter')
 @section('conten')
-<section class="content">
-@if (session('msg'))
-<div class="alert alert-success alert-dismissible">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <h4><i class="icon fa fa-check"></i> Berhasil</h4>
-  Data Berhasil Dimasukan
-</div>
-@endif
   <section class="content-header">
-      <h1>Alternatif Yang Belemu Terisi</h1>    
+      <h1>Informasi Pegawai Berperstasi</h1>    
     </section>
+    <br>
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="alert alert-info alert-dismissible">
+            {{-- <h4><i class="icon fa fa-check"></i> Berhasil</h4> --}}
+            @foreach ($nilais as $key => $value)
+                @if ($value == max($nilais))
+                <p class="text-center" style="font-weight: bold; text-transform: uppercase; ">SEMATA {{$key}} MENJADI PEGAWAI TERBAIK</p>
+                @endif
+            @endforeach
+           </div>
+    </div>
+   
+  </div>
     <section class="content">
       <!-- Small boxes (Stat box) -->    
 
       <!-- TABLE: LATEST ORDERS -->
-      {{-- <form>
-      <select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-      <button class="btn btn-primary">Tampilkan</button>
-      </form> --}}
       
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Nilai Alternatif</h3>
+              <h3 class="box-title">Informasi Pegawai Berperstasi</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -45,27 +44,27 @@
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>bidang</th>
-                    <th>Aksi</th>
+                    <th>Nilai</th>
+                  
                   </tr>
                   </thead>
                     @php
                       $no = 1;
                     @endphp
                   <tbody>
-                    @foreach ($users as $user)
-                    <tr>
-                      <td>{{$no}}</td>
-                      @php
-                        $no++
-                      @endphp
-                      <td>{{$user->name}}</td>
-                      <td>{{$user->sector}}</td> 
-                      <td>
-                         <a href="/masukan-nilai-alternatif/{{$user->id}}" class="btn btn-primary">Masukan Nilai </a>
-                       </td>
+                    
+                        @foreach ($nilais as $key => $value)
+                            <tr>
+                              <td>{{$no}}</td>
+                              @php
+                                  $no++;
+                              @endphp
+                        <td>{{$key}}</td>
+                            <td>{{$value}}</td>
                     </tr>
-                    @endforeach
+                        @endforeach
+                    {{-- </tr>  --}}
+                    
                   </tbody>
                 </table>
               </div>

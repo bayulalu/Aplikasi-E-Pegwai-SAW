@@ -2,6 +2,9 @@
 @extends('layouts.master')
 @section('title', 'Beranda')
 @section('conten')
+
+
+
   <section class="content-header">
       <h1>Beranda</h1>    
     </section>
@@ -41,6 +44,7 @@
                   <tbody>
   
                      @foreach ($jobs as $job)
+                     @if ($job->status != 'Acc')
                      @foreach ($job->users as $user)
                        @if ($user->id == Auth::user()->id)
                               
@@ -64,11 +68,20 @@
                         Belum Selesai
                       @endif
                     </td>
-                    <td>{{$job->level}}</td>
+                    <td>
+                   @if ($job->kualitas == 100)
+                        sulit
+                    @elseif($job->kualitas == 75)
+                        sedang
+                    @else
+                        mudah
+                    @endif  
+                    </td>
                     
                     <td><a href="/rincian/{{$job->slug}}" class="btn btn-info"">Lihat</a></td>
                     @endif
                      @endforeach
+                     @endif
                     @endforeach
 
                   </tbody>

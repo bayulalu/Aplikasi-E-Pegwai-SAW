@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use App\Models\Job;
 use App\Models\User;
@@ -54,6 +55,14 @@ class jobController extends Controller
         
         $slug = $slug = str_slug($request->judul.time(), '-');
 
+        if ($request->level == 'Ringan') {
+            $nilai = 50;
+        }else if($request->level == 'Sedang'){
+            $nilai = 75;
+        }else{
+            $nilai = 100;
+        }
+
         $job = job::create([
             'title' => $request->title, 
             'slug' => $slug,
@@ -62,8 +71,9 @@ class jobController extends Controller
             'deadLine' => $request->batasWaktu,
             'status' => 'belum',
             'kind' => $request->type,
-            'level' => $request->level,
-            'user_id' => $user->id
+            'kualitas' => $nilai,
+            'user_id' => $user->id,
+            'nwaktu' => 0
         ]); 
 
         $job->users()->attach($request->sectors);
@@ -163,17 +173,44 @@ class jobController extends Controller
     public function acc($id)
     {
         $job = Job::findOrFail($id); 
-        // $user = Auth::user();
+        
+        // ambil waktu sekarang 
+        date_default_timezone_set('Asia/Makassar');
 
-        // $this->notifAcc($job, $user);
+        $date = date('Y-m-d');
+        
+        $deadLine = $job->deadLine;
+        
 
+
+        if ($date < $deadLine) {
+            $nilai = 100;
+        }else if($date == $deadLine){
+            $nilai = 75;
+        }else if($date > $deadLine){
+            $nilai = 50;
+        }
             
         $job->update([
             'status' => 'Acc',
+            'nwaktu' => $nilai
         ]);
         return redirect('/daftar-pemberian-tugas');
     }
 
+    public function riwayat()
+    {
+        // die('hard');
+        // die('hard');
+        $user = Auth::user();
+        $jobs = Job::with('users')->where('user_id', $user->id)->orderBy('id', 'desc')->paginate(7);
+        // $jobs2 = Job::with('users')->orderBy('id', 'desc')->get();
+        // $jobs2 = DB::table('jobs')->paginate(15);
+        $jobs2 = Job::with('users')->orderBy('id', 'desc')->paginate(12);
+        // dd($jobs);
+       
+        return view('jobs.riwayat', compact('jobs', 'jobs2'));
+    }
     // notif
     //  public function notif($leaders, $users, $title, $id_job){
 

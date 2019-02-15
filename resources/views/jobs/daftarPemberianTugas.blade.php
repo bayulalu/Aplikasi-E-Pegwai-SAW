@@ -71,7 +71,15 @@
                       
                     <td>Belum Selesai </td>               
                     
-                    <td>{{$job->level}}</td>
+                    <td>
+                      @if ($job->kualitas == 100)
+                          sulit
+                      @elseif($job->kualitas == 75)
+                          sedang
+                      @else
+                          mudah
+                      @endif
+                    </td>
                     
                     <td><a href="/acc/{{$job->id}}" class="btn btn-success" onclick="return confirm('Apakah Anda Yakin Tugas Ini Sudah ACC ?')">Acc</a>
                     <a href="/pemberian-tugas/{{$job->id}}/edit" class="btn btn-warning">Edit</a>

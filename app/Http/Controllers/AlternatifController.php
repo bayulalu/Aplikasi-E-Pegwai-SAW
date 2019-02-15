@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Parameter;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class AlternatifController extends Controller
@@ -25,18 +26,15 @@ class AlternatifController extends Controller
 
     public function store(Request $request, $id)
     {
-
-        // $this->validate($request, [
-        //   'type' => 'required',
-        //   'sectors' => 'required',
-        //   'waktuSekarang' => 'required',
-        //   'batasWaktu' => 'required',
-        //   'level' => 'required',
-        //   'title' => 'required',
-        //   'ket' => 'required',
-
-        // ]);
-
+        $this->validate($request, [
+            'op2' => 'required',
+            'integrasi2' => 'required',
+            'komitmen2' => 'required',
+            'disiplin2' => 'required',
+            'ks2' => 'required',
+            'kepemimpinan2' => 'required|string'
+        ]);
+  
         /*
             memasukan dengan metode sins 
 
@@ -50,12 +48,18 @@ class AlternatifController extends Controller
         $this->submitAlternatif($user,$request->ks, $request->ks2);
         $this->submitAlternatif($user,$request->kepemimpinan, $request->kepemimpinan2);
 
-        die('berhasil');
-        return view('spk.inputAlternatif', compact('user'));
+        // die('berhasil');
+        // redirect()->route('job')->with
+        return redirect()->route('alternatif')->with('msg','Data Berhasil Di Simpan');
     }
 
     public function submitAlternatif($user,$value1, $value2)
     {
         $user->parameters()->attach($value1, ['nilai' => $value2]);
+    }
+
+    public function daftarNilai(){
+        $users = User::where('eslon', '>' , '2')->has('parameters')->has('jobss')->get();
+        return view('spk.daftarNilai', compact('users'));
     }
 }

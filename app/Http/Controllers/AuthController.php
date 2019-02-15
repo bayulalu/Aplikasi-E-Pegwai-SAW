@@ -71,7 +71,7 @@ class AuthController extends Controller
       ]);
 
        // die('hard');
-       return redirect()->route('daftar');
+       return redirect()->route('daftar')->with('msg','Data Berhasil Di Simpan');
     }
 
     public function group($request){

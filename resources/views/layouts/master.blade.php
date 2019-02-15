@@ -166,10 +166,11 @@
         
         <li>
         @if (Auth::user()->group1 != 'admin')
+        @if (Auth::user()->eslon != 2)
           <a href="{{route('beranda')}}">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
-          
+          @endif  
         </li>
         <li class="treeview">
           <a href="#">
@@ -180,18 +181,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            @if (Auth::user()->eslon < 5 )
+            @if (Auth::user()->eslon != 5 )
               {{-- expr --}}
             <li><a href="{{route('job')}}"><i class="fa  fa-archive"></i>Pemberian Tugas</a></li>
-            @endif
             
             {{-- @if (Auth::user()->status != 3) --}}
-            <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Daftar Tugas</a></li>
+            {{-- <li><a href="{{ route('listJobs') }}"><i class="fa fa-book"></i>Daftar Tugas</a></li> --}}
             {{-- @endif --}}
-
             <li><a href="{{ route('listJob') }}"><i class="fa fa-book"></i>Daftar Pemberian Tugas</a></li>
-            
-            <li><a href="{{-- {{route('history')}} --}}"><i class="fa fa-eyedropper"></i>Riwayat</a></li>
+            @endif
+            <li><a href="{{route('riwayat')}}"><i class="fa fa-eyedropper"></i>Riwayat</a></li>
             
           </ul>
           @endif
@@ -210,13 +209,9 @@
           <ul class="treeview-menu">
             <li><a href="{{route('daftar')}}"><i class="fa  fa-archive"></i>Masukan Pegawai</a></li>
             
-            {{-- @if (Auth::user()->status != 3) --}}
-            
-            {{-- @endif --}}
-
             <li><a href="{{ route('alternatif') }}"><i class="fa fa-book"></i>Alternatif</a></li>
 
-            <li><a href="{{ route('alternatif') }}"><i class="fa fa-book"></i>Daftar Nilai Alternatif</a></li>
+            <li><a href="{{ route('daftarNilai') }}"><i class="fa fa-book"></i>Daftar Nilai Alternatif</a></li>
 
             <li><a href="{{route('parameter')}}"><i class="fa fa-eyedropper"></i>Parameter </a></li>  
           </ul>
@@ -232,10 +227,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Info Daftar Pegawai</a></li>
-                        
             {{-- @if (Auth::user()->status != 3) --}}
-            <li><a href="{{-- {{ route('listJobs') }} --}}"><i class="fa fa-book"></i>Info Pegawai Berperstasi</a></li>
+            <li><a href="{{ route('info') }}"><i class="fa fa-book"></i>Info Pegawai Berperstasi</a></li>
             {{-- @endif --}}
             
           </ul>
@@ -250,9 +243,6 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{-- {{ route('ketua.profile') }} --}}"><i class="fa fa-user"></i>Profile</a></li>
-            <li><a href="{{-- {{ route('ketua.ubah') }} --}}"><i class="fa  fa-cog"></i>Ubah Profile</a></li>
-            <li><a href="{{-- {{ route('ketua.ubahSandi') }} --}}"><i class="fa  fa-cog"></i>Ubah Kata Sandi</a></li>
             <li><a href="{{route('logout')}}"><i class="fa fa-sign-out"></i>Keluar</a></li>
           </ul>
         </li>

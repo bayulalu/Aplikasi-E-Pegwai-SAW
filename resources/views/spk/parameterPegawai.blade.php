@@ -35,7 +35,7 @@
                   </thead>
                    
                   <tbody>
-                @foreach ($parameters->where('katagori', 'Sasaran Kerja Pegawai') as $parameter)
+                @foreach ($parameters->where('katagori', 'sasaran kerja pegawai') as $parameter)
                     <tr>
                   <td>{{$no}}</td>
                   @php
@@ -47,8 +47,7 @@
                     @endforeach
                     </tr>
                     <td></td>
-                    <td>Total</td>
-                    <td> <span class="badge bg-red">{{$parameters->where('katagori', 'Sasaran Kerja Pegawai')->count()}} %</span></td>
+                    
                   </tbody>
                 </table>
               </div>
@@ -86,7 +85,7 @@
                   </thead>
                    
                   <tbody>
-                @foreach ($parameters->where('katagori', 'Perilaku Kerja') as $parameter)
+                @foreach ($parameters->where('katagori', 'perilaku kerja') as $parameter)
                     <tr>
                   <td>{{$no}}</td>
                   @php
