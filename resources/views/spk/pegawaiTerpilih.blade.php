@@ -13,7 +13,7 @@
             {{-- <h4><i class="icon fa fa-check"></i> Berhasil</h4> --}}
             @foreach ($nilais as $key => $value)
                 @if ($value == max($nilais))
-                <p class="text-center" style="font-weight: bold; text-transform: uppercase; ">SEMATA {{$key}} MENJADI PEGAWAI TERBAIK</p>
+                <p class="text-center" style="font-weight: bold; text-transform: uppercase; ">SELAMAT {{$key}} MENJADI PEGAWAI TERBAIK</p>
                 @endif
             @endforeach
            </div>

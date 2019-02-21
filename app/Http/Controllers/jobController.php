@@ -204,6 +204,7 @@ class jobController extends Controller
         // die('hard');
         $user = Auth::user();
         $jobs = Job::with('users')->where('user_id', $user->id)->orderBy('id', 'desc')->paginate(7);
+        // $jobs = Job::with('users')->where('user_id', $user->id)->orderBy('id', 'desc')->get();
         // $jobs2 = Job::with('users')->orderBy('id', 'desc')->get();
         // $jobs2 = DB::table('jobs')->paginate(15);
         $jobs2 = Job::with('users')->orderBy('id', 'desc')->paginate(12);

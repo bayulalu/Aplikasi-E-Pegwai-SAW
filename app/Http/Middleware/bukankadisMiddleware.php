@@ -23,7 +23,7 @@ class bukankadisMiddleware
             return $next($request);
         
         }
-        return redirect()->route('listJob');
+        return redirect()->route('info');
         
     }
 }

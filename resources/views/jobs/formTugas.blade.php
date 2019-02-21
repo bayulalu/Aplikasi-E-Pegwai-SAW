@@ -55,7 +55,7 @@
                     @endif
 
                     <label>
-                      <input type="radio" checked name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Setaf 
+                      <input type="radio" checked name="type" id="optionsRadios2" value="staf"  class="jabtan" {{old('type') == "staf" ? 'checked='.'"'.'checked'.'"' : '' }}>Staf 
                     </label>
                     
                   {{-- </div> --}}
@@ -102,7 +102,7 @@
 
               {{-- tiga --}}
                <div class="form-group" id="staf">
-                <label>Pilih Setaf</label>
+                <label>Pilih Staf</label>
                 <small class="label label-danger tes loading "><i class="fa fa-clock-o"></i> Loading ...</small>
                 <select   class="form-control select2" name="sectors[]" id="staf" multiple="multiple" data-placeholder="Nama"
                         style="width: 100%;">

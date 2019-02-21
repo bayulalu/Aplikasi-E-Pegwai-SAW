@@ -9,9 +9,23 @@ use Illuminate\Http\Request;
 
 class AlternatifController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('eslon', '>' , '2')->has('parameters', 'empty')->get();
+
+        // $tags = Tag::all();
+        $search_q = urldecode($request->search);
+
+        if (!empty($search_q)){
+            // $quotes = Quote::with('tags')->where('title','like','%'.$search_q.'%')->get();
+            $users = User::where('group2', 'like' ,'%'.$search_q.'%')->has('parameters', 'empty')->get();
+            
+        }else{
+            // $quotes = Quote::with('tags')->orderBy('id', 'desc')->get();
+            $users = User::where('eslon', '>' , '2')->has('parameters', 'empty')->get();
+        }
+
+        // =============
+        
        
         return view('spk.alternatif', compact('users'));
     }

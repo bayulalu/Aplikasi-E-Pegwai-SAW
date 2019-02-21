@@ -30,7 +30,7 @@
                     <th>Nama Parameter</th>
                     <th>Bobot</th>
                     
-                    <th >Aksi</th>
+                    {{-- <th >Aksi</th> --}}
                   </tr>
                   </thead>
                    
@@ -43,7 +43,7 @@
                   @endphp
                   <td>{{$parameter->name}}</td>
                   <td><span class="badge bg-red">{{$parameter->bobot}} %</span></td>
-                  <td><a href="" class="btn btn-warning">Ubah</a></td>
+                  {{-- <td><a href="" class="btn btn-warning">Ubah</a></td> --}}
                     @endforeach
                     </tr>
                     <td></td>
@@ -80,7 +80,7 @@
                     <th>Nama Parameter</th>
                     <th>Bobot</th>
                     
-                    <th >Aksi</th>
+                    {{-- <th >Aksi</th> --}}
                   </tr>
                   </thead>
                    
@@ -93,7 +93,7 @@
                   @endphp
                   <td>{{$parameter->name}}</td>
                   <td><span class="badge bg-red">{{$parameter->bobot}} %</span></td>
-                  <td><a href="" class="btn btn-warning">Ubah</a></td>
+                  {{-- <td><a href="" class="btn btn-warning">Ubah</a></td> --}}
                     @endforeach
                     </tr>
                   </tbody>

@@ -60,6 +60,10 @@ class PerhitunganController extends Controller
         $waktu;
         $nWaktu = $this->normalisai($waktu);
         // dd($waktu);
+
+        $op;
+        $nOp = $this->normalisai($op);
+
         $integrasi;
         $nIntegrasi = $this->normalisai($integrasi);
 
@@ -88,19 +92,39 @@ class PerhitunganController extends Controller
             $prmss[] = $prm->bobot / 100;
         }
         $prmss;
-        $jumlah []= 0;
-        // perhitungan rengking bobot * nilai normal + bnyak pram (pisah)
         
-       for ($i=0; $i <= count($prmss) ; $i++) {
+        // perhitungan rengking bobot * nilai normal + bnyak pram (pisah)
+        // dd($nKulitas);
+    //    for ($i=0; $i < count($nKulitas) ; $i++) {
            
-           for ($j=0; $j < count($nKulitas); $j++) { 
-               if ($j == $i) {
-                $jumlah[$i] = $prmss[$i] * $nKulitas[$j]; 
-               }
+    //        for ($j=0; $j < count($prmss); $j++) { 
+    //            if ($j == $i) {
+    //             $jumlah[$i] = $prmss[$i] * $nKulitas[$j]; 
+    //            }
             
-           } 
-       }
-       $jumlah;
+    //        } 
+    //    }
+
+
+
+// dd($nKulitas[0] * $prmss[0]) ;
+// $jumlah = ($nKulitas[0] * $prmss[0]) +  ($nKuantitas[0] * $prmss[1]) + ($nWaktu[0] * $prmss[2]) +
+//      ($op[0] * $prmss[3] ) + ($nIntegrasi[0] * $prmss[4] ) + ($nKomitmen[0] * $prmss[5] ) + 
+//  ($nDisiplin[0] * $prmss[6] )+ ($nKs[0] * $prmss[7]) + ($nKepemimpinan[0] * $prmss[8]);
+// dd($jumlah);
+// dd($jumlah);
+$jumlah = $nKulitas;
+// dd($prmss[0]);
+for ($i=0; $i < count($nKulitas)  ; $i++) { 
+
+        $jumlah[$i] = ($nKulitas[$i] * $prmss[0]) +  ($nKuantitas[$i] * $prmss[1]) + ($nWaktu[$i] * $prmss[2]) +
+        ($op[$i] * $prmss[3] ) + ($nIntegrasi[$i] * $prmss[4] ) + ($nKomitmen[$i] * $prmss[5] ) + 
+        ($nDisiplin[$i] * $prmss[6] )+ ($nKs[$i] * $prmss[7]) + ($nKepemimpinan[$i] * $prmss[8]);
+
+}
+
+// dd($jumlah);
+
        $nilais = array_combine($user, $jumlah);
     //    $nilais = asort($jumlah);
     //    dd($nilais);

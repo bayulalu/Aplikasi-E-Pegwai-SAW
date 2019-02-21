@@ -17,15 +17,19 @@
       <!-- Small boxes (Stat box) -->    
 
       <!-- TABLE: LATEST ORDERS -->
-      {{-- <form>
-      <select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
+      <form method="GET" action="alternatif">
+      <select name="search">
+        <option value="">Pilih</option>
+        <option value="Sekertaris">Kesekrateriatan</option>
+        <option value="Informasi & Komuikasi Public">Bidang Informasi Dan Komunikasi Publik</option>
+        <option value="Pengelolahan Teknologi & Komunikasi">Bidang Pengelolaan Teknologi Informasi Dan Komunikasi</option>
+        <option value="Persedian Dan LPSE">Bidang Persandian Dan LPSE</option>
+        <option value="Balai Informasi Teknologi Edukasi">Balai ITE</option>
+        <option value="Statistik">Statisitk</option>
       </select>
       <button class="btn btn-primary">Tampilkan</button>
-      </form> --}}
-      
+      </form>
+      <br>
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Nilai Alternatif</h3>
