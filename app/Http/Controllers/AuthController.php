@@ -75,8 +75,8 @@ class AuthController extends Controller
     }
 
     public function group($request){
-      if (($request->sector == 'Program' || $request->sector == 'Keuangan' || $request->sector == 'Umum' || $request->sector == 'Sekertaris')  && ($request->eslon == 4 || $request->eslon == 5)) {
-          return $group2 = 'Sekertaris';
+      if (($request->sector == 'Program' || $request->sector == 'Keuangan' || $request->sector == 'Umum' || $request->sector == 'Sekretaris')  && ($request->eslon == 4 || $request->eslon == 5)) {
+          return $group2 = 'Sekretaris';
 
       }elseif ($request->sector == 'Informasi & Komuikasi Public' || $request->sector == 'Pengelolahan & Dokumentasi Informasi' || $request->sector == 'Publikasi' || $request->sector == 'Kelembagaan'  && $request->eslon == 4 || $request->eslon == 5) {
           return $group2 = 'Informasi & Komuikasi Public';

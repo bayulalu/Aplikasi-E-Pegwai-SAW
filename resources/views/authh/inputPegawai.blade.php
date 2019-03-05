@@ -60,7 +60,7 @@
                     <option value="">Pilih</option>
                     <option value="Kepala Dinas">Kepala Dinas</option>
                     <option value="" disabled>============</option>
-                    <option value="Sekertaris">Sekertaris</option>
+                    <option value="Sekretaris">Sekretaris</option>
                     <option value="Program">Program</option>
                     <option value="Keuangan">Keuangan</option>
                     <option value="Umum">Umum</option>

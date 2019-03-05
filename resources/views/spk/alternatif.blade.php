@@ -20,7 +20,7 @@
       <form method="GET" action="alternatif">
       <select name="search">
         <option value="">Pilih</option>
-        <option value="Sekertaris">Kesekrateriatan</option>
+        <option value="Sekretaris">Kesekrateriatan</option>
         <option value="Informasi & Komuikasi Public">Bidang Informasi Dan Komunikasi Publik</option>
         <option value="Pengelolahan Teknologi & Komunikasi">Bidang Pengelolaan Teknologi Informasi Dan Komunikasi</option>
         <option value="Persedian Dan LPSE">Bidang Persandian Dan LPSE</option>
